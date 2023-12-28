@@ -24,6 +24,8 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasComponent -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasComponent">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
     </owl:ObjectProperty>
@@ -33,6 +35,9 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasConnectionType -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasConnectionType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -50,18 +55,75 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasKeyboardLayout -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasKeyboardLayout">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Keyboard"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KeyboardLayout"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasSpeed -->
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasSpeed">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAMSpeed"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#isComponentOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#isComponentOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasClockSpeed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasClockSpeed">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Value in MHz</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfCores -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfCores">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfThreads -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfThreads">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
     
 
 
@@ -108,6 +170,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Software"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SystemSoftware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AudioComponent -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AudioComponent">
@@ -118,6 +189,54 @@
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DeviceConnectionType"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BarcodeScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BarcodeScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BiometricScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BiometricScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Blu-ray -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Blu-ray">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-R -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-R">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-ROM -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-ROM">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-RW -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-RW">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc"/>
     </owl:Class>
     
 
@@ -142,6 +261,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#InternalComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice"/>
     </owl:Class>
     
 
@@ -172,6 +299,12 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Controller">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasConnectionType"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DeviceConnectionType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -220,6 +353,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAMSpeed"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DVD -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DVD">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice"/>
     </owl:Class>
     
 
@@ -275,6 +416,23 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Driver -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Driver">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SystemSoftware"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OperatingSystem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DrumScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DrumScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ESATAPort -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ESATAPort">
@@ -287,6 +445,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#EarbudsHeadphones">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Headphones"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#EducationSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#EducationSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
     </owl:Class>
     
 
@@ -317,6 +483,38 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalHDD -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalHDD">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MagneticExternalStorageDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalSSD -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalSSD">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDevice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDevice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDeviceReader -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDeviceReader">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#InternalComponent"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FBDIMM -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FBDIMM">
@@ -325,10 +523,42 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDevice"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlatTowerCooler -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlatTowerCooler">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AirCooling"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlatbedScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlatbedScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FloppyDisk -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FloppyDisk">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MagneticExternalStorageDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FloppyDiskDrive -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FloppyDiskDrive">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDeviceReader"/>
     </owl:Class>
     
 
@@ -365,6 +595,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GraphicSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GraphicSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HDD -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HDD">
@@ -378,6 +616,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HDMIPort">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Port"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HandheldScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HandheldScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
     </owl:Class>
     
 
@@ -547,6 +793,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LedPrinter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LedPrinter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LineInPort -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LineInPort">
@@ -582,6 +836,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MagneticExternalStorageDevice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MagneticExternalStorageDevice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDevice"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MechanicalKeyboard -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MechanicalKeyboard">
@@ -595,6 +857,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MembraneKeyboard">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Keyboard"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MemoryCard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MemoryCard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory"/>
     </owl:Class>
     
 
@@ -677,6 +947,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MultimediaSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MultimediaSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MultimediaSpeakers -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MultimediaSpeakers">
@@ -704,7 +982,15 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OperatingSystem -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OperatingSystem">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Software"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SystemSoftware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalDiskDrive -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalDiskDrive">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDeviceReader"/>
     </owl:Class>
     
 
@@ -713,6 +999,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalMouse">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Mouse"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDevice"/>
     </owl:Class>
     
 
@@ -755,10 +1049,24 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#PresentationSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#PresentationSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasConnectionType"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DeviceConnectionType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -771,7 +1079,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#InternalComponent"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasSpeed"/>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
                         <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAMSpeed"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
@@ -807,6 +1115,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SDCardReader -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SDCardReader">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalStorageDeviceReader"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply">
@@ -832,10 +1148,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalComponent"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ServerCPU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ServerCPU">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Sheet-fedScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Sheet-fedScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
     </owl:Class>
     
 
@@ -860,6 +1192,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Speakers">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AudioComponent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SpreadsheetSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SpreadsheetSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
     </owl:Class>
     
 
@@ -896,6 +1236,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SystemSoftware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SystemSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Software"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#TFXPowerSupply -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#TFXPowerSupply">
@@ -908,6 +1256,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#TenkeylessKeyboardLayout">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KeyboardLayout"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ThermalPrinter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ThermalPrinter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer"/>
     </owl:Class>
     
 
@@ -932,6 +1288,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#USBFlashDrive -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#USBFlashDrive">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory"/>
     </owl:Class>
     
 
@@ -983,6 +1347,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#VideoGames -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#VideoGames">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WebBrowser -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WebBrowser">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Wi-FiCard -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Wi-FiCard">
@@ -1011,6 +1391,30 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Wireless">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DeviceConnectionType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WordProcessors -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WordProcessors">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ApplicationSoftware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DPrinter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DPrinter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DScanner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DScanner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
     </owl:Class>
     
 
@@ -1067,6 +1471,34 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BarcodeScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#BiometricScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DrumScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlatbedScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HandheldScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Sheet-fedScanner"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DScanner"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Blu-ray"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CompactDisc"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DVD"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-R"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-ROM"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CD-RW"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
@@ -1115,7 +1547,9 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DotmaxPrinter"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#InkjetPrinter"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LaserPrinter"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LedPrinter"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ThermalPrinter"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#3DPrinter"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
@@ -1130,9 +1564,38 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#EducationSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GraphicSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MultimediaSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#PresentationSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SpreadsheetSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#VideoGames"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WebBrowser"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WordProcessors"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ExternalSSD"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MemoryCard"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#USBFlashDrive"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FBDIMM"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LRDIMM"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RDIMM"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlashMemory"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MagneticExternalStorageDevice"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#OpticalStorageDevice"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
