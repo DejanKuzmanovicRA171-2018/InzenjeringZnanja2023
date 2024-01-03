@@ -5,7 +5,8 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:computer-ontology-classes="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes"/>
     
 
@@ -257,6 +258,7 @@
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Keyboard"/>
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Mouse"/>
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Printer"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Scanner"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -1067,7 +1069,14 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#InternalComponent"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
         <rdfs:range rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAMSpeed"/>
     </owl:ObjectProperty>
     
@@ -1443,14 +1452,39 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasBuffer -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasBuffer">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasClockSpeed -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasClockSpeed">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
         <rdfs:comment>Value in MHz</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasGPUIntegrated -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasGPUIntegrated">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
 
@@ -1458,8 +1492,24 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfCores -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfCores">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
@@ -1468,7 +1518,28 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfThreads -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfThreads">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPrice -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPrice">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasVRAM -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasVRAM">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
@@ -1723,6 +1794,26 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DedicatedGPU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DedicatedGPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasVRAM"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</xsd:minExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntegratedGPU"/>
     </owl:Class>
@@ -1732,6 +1823,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DesktopCPU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DesktopCPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasGPUIntegrated"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ServerCPU"/>
     </owl:Class>
@@ -1741,6 +1843,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DesktopComputer -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DesktopComputer">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasCase"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LaptopComputer"/>
     </owl:Class>
@@ -2036,6 +2149,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntegratedGPU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntegratedGPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasVRAM"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
     </owl:Class>
     
@@ -2457,6 +2581,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RegisteredRAM -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RegisteredRAM">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasBuffer"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
     </owl:Class>
@@ -2482,6 +2617,81 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SODIMM -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SODIMM">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</owl:hasValue>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR2"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</owl:hasValue>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                            <owl:Class>
+                                <owl:unionOf rdf:parseType="Collection">
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR3"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">204</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">260</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">262</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:unionOf>
+                            </owl:Class>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM"/>
     </owl:Class>
@@ -2507,6 +2717,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ServerCPU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ServerCPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasGPUIntegrated"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
     </owl:Class>
     
@@ -2635,6 +2856,81 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">184</owl:hasValue>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR2"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">240</owl:hasValue>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                            <owl:Class>
+                                <owl:unionOf rdf:parseType="Collection">
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR3"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">278</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">288</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasRAMSpeed"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+                                            </owl:Restriction>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasNumberOfPins"/>
+                                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">288</owl:hasValue>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:unionOf>
+                            </owl:Class>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM"/>
     </owl:Class>
     
@@ -2676,6 +2972,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UnregisteredRAM">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasBuffer"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
     </owl:Class>
     
@@ -2780,6 +3087,73 @@
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#PS/2MousePort">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Port"/>
     </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1-1600 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1-1600">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DediciraniGPU1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DediciraniGPU1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntegrisaniGPU1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntegrisaniGPU1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GPU"/>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntelI9 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntelI9">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#int">140</computer-ontology-classes:hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntelXeonE55 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IntelXeonE55">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CPU"/>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasGPUIntegrated>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#UDIMM1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAM"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1-1600"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasNumberOfPins rdf:datatype="http://www.w3.org/2001/XMLSchema#int">184</computer-ontology-classes:hasNumberOfPins>
+    </owl:NamedIndividual>
     
 
 
