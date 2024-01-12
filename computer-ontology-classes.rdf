@@ -1645,6 +1645,24 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCCase -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCCase">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCI-E3.0x16 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCI-E3.0x16">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Motherboard"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPrice -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPrice">
@@ -2284,8 +2302,8 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasCase"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCCase"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -2829,6 +2847,17 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LaptopComputer -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#LaptopComputer">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#hasPCCase"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Computer"/>
     </owl:Class>
     
@@ -3809,6 +3838,194 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_EPYC_9654P -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_EPYC_9654P">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">96</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">192</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_R9_FURY_X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_R9_FURY_X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1050</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4096</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_RX_460 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_RX_460">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1090</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">896</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_RX_7900_XT -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Radeon_RX_7900_XT">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5367</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_3_4100 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_3_4100">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3800</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_3_PRO_4355GE -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_3_PRO_4355GE">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_3600 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_3600">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_5600X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_5600X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3700</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_PRO_3400GE -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_5_PRO_3400GE">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3300</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_7_3800X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_7_3800X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3900</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_9_3900X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_9_3900X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3800</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_9_5900X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AMD_Ryzen_9_5900X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3700</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATI_Radeon_HD_5570 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATI_Radeon_HD_5570">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">650</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">320</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_2400_C16_4x4GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_2400_C16_4x4GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_3000_C15_2x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_3000_C15_2x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3000</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_3200_C16_2x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_Vengeance_LPX_DDR4_3200_C16_2x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3200</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1">
@@ -3845,6 +4062,564 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#RAMSpeed"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#G.SKILL_Ripjaws_4_DDR4_2400_C14_8x16GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#G.SKILL_Ripjaws_4_DDR4_2400_C14_8x16GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">128</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#G_Skill_Intl_F2-8800CL5-2GBPI_2GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#G_Skill_Intl_F2-8800CL5-2GBPI_2GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR2"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">667</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GeForce_RTX_4080 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GeForce_RTX_4080">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2205</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9728</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GeForce_RTX_4090 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GeForce_RTX_4090">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2230</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16384</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Hikvision_Hiksemi_FUTURE_4_TB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Hikvision_Hiksemi_FUTURE_4_TB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6600</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Hitachi_HDS721050CLA660_500GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Hitachi_HDS721050CLA660_500GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7200</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">99</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1600_C10_2x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1600_C10_2x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR3"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1866_C10_2x4GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1866_C10_2x4GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR3"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1866</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1866_C10_2x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR3_1866_C10_2x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR3"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1866</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2133</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2666_C15_4x8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2666_C15_4x8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR4"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2666</computer-ontology-classes:hasClockSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i3-10105_3.70GHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i3-10105_3.70GHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3700</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i3-12100F -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i3-12100F">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3300</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i5-13600K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i5-13600K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i5-14400F -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i5-14400F">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i7-2600K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i7-2600K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i7-5930K_3.50GHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i7-5930K_3.50GHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i9-10900X -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i9-10900X">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3700</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i9-9900K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Core_i9-9900K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_G620_2.60GHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_G620_2.60GHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_G645T_2.50GHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_G645T_2.50GHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_M_processor_1.60GHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Pentium_M_processor_1.60GHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Xeon_Platinum_8580_Processor -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Intel_Xeon_Platinum_8580_Processor">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2000</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasGPUIntegrated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasGPUIntegrated>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">60</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasNumberOfThreads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">120</computer-ontology-classes:hasNumberOfThreads>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_FURY_Beast_RGB_8GB_DDR5_5600MHz_CL40_-_KF556C40BBA-8 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_FURY_Beast_RGB_8GB_DDR5_5600MHz_CL40_-_KF556C40BBA-8">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_Fury_Beast_16GB_DDR5_5600MHz_CL40_-_KF556C40BB-16 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_Fury_Beast_16GB_DDR5_5600MHz_CL40_-_KF556C40BB-16">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_Fury_Renegade_16GB_DDR5_6400MHz_CL32_KF564C32RSA-16 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#KINGSTON_Fury_Renegade_16GB_DDR5_6400MHz_CL32_KF564C32RSA-16">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Kingston_2GB-DDR2_800Mhz_2GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Kingston_2GB-DDR2_800Mhz_2GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR2"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">800</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Kingston_FURY_Renegade_KF560C32RS-16_16GB_DDR5 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Kingston_FURY_Renegade_KF560C32RS-16_16GB_DDR5">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR5"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3000</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MSI_Spatium_M461_1_TB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MSI_Spatium_M461_1_TB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3200</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Maticna1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Maticna1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Motherboard"/>
+        <computer-ontology-classes:hasPCI-E3.0x16 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</computer-ontology-classes:hasPCI-E3.0x16>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Maticna2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Maticna2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Motherboard"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_1050_Ti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_1050_Ti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1291</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">768</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_960 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_960">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1127</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1024</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_980_Ti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_980_Ti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2816</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GT_220 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GT_220">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">600</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">48</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_RTX_3090_Ti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_RTX_3090_Ti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1560</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10752</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Radeon_RX_7900_XTX -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Radeon_RX_7900_XTX">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1855</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6144</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_980_PRO_1_TB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_980_PRO_1_TB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5000</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_980_PRO_500_GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_980_PRO_500_GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5000</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_PM9B1_512_GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Samsung_PM9B1_512_GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">512</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2500</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Seagate_BarraCuda -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Seagate_BarraCuda">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7200</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">193</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Seagate_ST1000LX015_FireCuda_1_TB_5400_RPM -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Seagate_ST1000LX015_FireCuda_1_TB_5400_RPM">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5400</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">60</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Silicon_Power_Ace_A55_256_GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Silicon_Power_Ace_A55_256_GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">256</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">530</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WD1600JD-22HBB0_160GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#WD1600JD-22HBB0_160GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">160</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7200</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">140</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Western_Digital_Blue_Desktop_2TB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Western_Digital_Blue_Desktop_2TB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5400</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">175</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Western_Digital_Blue_Desktop_500GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Western_Digital_Blue_Desktop_500GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5400</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">175</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#wd_black_sn850x_nvme_pcie_m.2_1tb -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#wd_black_sn850x_nvme_pcie_m.2_1tb">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6300</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#wd_black_sn850x_nvme_pcie_m.2_2tb -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#wd_black_sn850x_nvme_pcie_m.2_2tb">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2000</computer-ontology-classes:hasCapacity>
+        <computer-ontology-classes:hasRPM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</computer-ontology-classes:hasRPM>
+        <computer-ontology-classes:hasWriteSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6300</computer-ontology-classes:hasWriteSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#1GB_STICK_DIMM_DDR_NON-ECC_PC3200_400MHz -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#1GB_STICK_DIMM_DDR_NON-ECC_PC3200_400MHz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasRAMSpeed rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DDR1"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">400</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</computer-ontology-classes:hasSizeOfRAM>
     </owl:NamedIndividual>
     
 
