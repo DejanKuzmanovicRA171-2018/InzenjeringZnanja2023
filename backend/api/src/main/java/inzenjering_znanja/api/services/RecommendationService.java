@@ -1,12 +1,11 @@
 package inzenjering_znanja.api.services;
 
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Resource;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import inzenjering_znanja.api.Models.CPU;
+import inzenjering_znanja.api.DTO.RecommendDTO;
 
 @Service
 public class RecommendationService {
@@ -14,49 +13,110 @@ public class RecommendationService {
     ExecuteQueryService eqService;
     private String ontUri = "http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#";
 
-    public ResultSet recommendMissingComponents(String CPU, String GPU, String RAM, String Motherboard, String Case,
-            String PSU) {
-        Resource cpu = eqService.infModel.getResource(ontUri + CPU);
-        Resource gpu = eqService.infModel.getResource(ontUri + GPU);
-        Resource ram = eqService.infModel.getResource(ontUri + RAM);
-        Resource motherboard = eqService.infModel.getResource(ontUri + Motherboard);
-        Resource pcCase = eqService.infModel.getResource(ontUri + Case);
-        // Start buliding query
-        String queryString = "PREFIX <" + ontUri + ">\n" +
-                "SELECT ?cpu ?gpu ?ram ?motherboard ?case ?psu \n" +
-                "WHERE {";
+    public List<String> recommendComponents(RecommendDTO constraints) {
 
-        // Check if each resource exists
-        if (cpu != null && cpu.isResource()) {
-            // The CPU resource exists
-            System.out.println("CPU resource exists");
-            queryString += "  ?cpu owl:sameAs ont:" + cpu.getLocalName() + " .\n";
+        // Start buliding query
+        String queryString = "PREFIX ont:<" + ontUri + ">\n" +
+                "SELECT ?cpu ?gpu ?ram ?motherboard ?storage\n" +
+                "WHERE {\n" +
+                "?cpu a ont:CPU. ?gpu a ont:GPU. ?ram a ont:RAM. ?motherboard a ont:Motherboard. ?storage a ont:Storage.\n"
+                +
+                "?gpu ont:hasPCI-E ?gc. ?motherboard ont:hasPCI-E ?gc. \n" +
+                "?cpu ont:hasSocket ?socket. ?motherboard ont:hasSocket ?socket. \n" +
+                "?ram ont:hasRAMSpeedType ?ramSpeed. ?motherboard ont:hasRAMSpeedType ?ramSpeed. ?cpu ont:hasRAMSpeedType ?ramSpeed. ?ram ont:hasNumberOfRAMSlots ?ramSlotsR. ?motherboard ont:hasNumberOfRAMSlots ?ramSlotsM. FILTER(?ramSlotsR <= ?ramSlotsM). \n"
+                +
+                "?motherboard ont:hasRAMCapacity ?ramCapacityM. ?ram ont:hasSizeOfRAM ?ramCapacityR. \n" +
+                "FILTER(?ramCapacityR <= ?ramCapacityM).\n";
+        // Append constraints to query
+        queryString = appendConstraintsToQueryString(queryString, constraints);
+        System.out.println(queryString);
+        // Execute query
+        List<String> resultList = eqService.executeRecommendQuery(queryString);
+        return resultList;
+    }
+
+    private String appendConstraintsToQueryString(String queryString, RecommendDTO constraints) {
+        // CPU CONSTRAINTS
+        if (constraints.cpuClockMin != 0) {
+            queryString += "?cpu ont:hasClockSpeed ?cpuClock . \n" +
+                    "FILTER(?cpuClock >=" + constraints.cpuClockMin + ") .\n";
         }
-        if (gpu != null && gpu.isResource()) {
-            // The GPU resource exists
-            System.out.println("GPU resource exists");
-            queryString += "  ?gpu owl:sameAs ont:" + gpu.getLocalName() + " .\n";
+        if (constraints.cpuClockMax != 0) {
+            queryString += "?cpu ont:hasClockSpeed ?cpuClock . \n" +
+                    "FILTER(?cpuClock <=" + constraints.cpuClockMax + ") .\n";
         }
-        if (ram != null && ram.isResource()) {
-            // The RAM resource exists
-            System.out.println("RAM resource exists");
-            queryString += "  ?ram owl:sameAs ont:" + ram.getLocalName() + " .\n";
+        if (constraints.cpuCoresMin != 0) {
+            queryString += "?cpu ont:hasNumberOfCores ?cpuCores . \n" +
+                    "FILTER(?cpuCores >=" + constraints.cpuCoresMin + ") .\n";
         }
-        if (motherboard != null && motherboard.isResource()) {
-            // The Motherboard resource exists
-            System.out.println("Motherboard resource exists");
-            queryString += "  ?motherboard owl:sameAs ont:" + motherboard.getLocalName() + " .\n";
+        if (constraints.cpuCoresMax != 0) {
+            queryString += "?cpu ont:hasNumberOfCores ?cpuCores . \n" +
+                    "FILTER(?cpuCores <=" + constraints.cpuCoresMax + ") .\n";
         }
-        if (pcCase != null && pcCase.isResource()) {
-            // The Case resource exists
-            System.out.println("Case resource exists");
-            queryString += "  ?case owl:sameAs ont:" + pcCase.getLocalName() + " .\n";
+        if (constraints.cpuThreadsMin != 0) {
+            queryString += "?cpu ont:hasNumberOfThreads ?cpuThreads . \n" +
+                    "FILTER(?cpuThreads >=" + constraints.cpuThreadsMin + ") .\n";
         }
-        queryString += "?cpu ont:isCompatibleWithMotherboard ?motherboard . \n" +
-                "?gpu ont:isCompatibleWithMotherboard ?motherboard . \n" +
-                "?ram ont:isCompatibleWithMotherboard ?motherboard . \n" +
-                "?ram ont:isCompatibleWithCPU ?cpu";
-        return null;
+        if (constraints.cpuThreadsMax != 0) {
+            queryString += "?cpu ont:hasNumberOfThreads ?cpuThreads . \n" +
+                    "FILTER(?cpuThreads <=" + constraints.cpuThreadsMax + ") .\n";
+        }
+        // GPU CONSTRAINTS
+        if (constraints.gpuClockMin != 0) {
+            queryString += "?gpu ont:hasClockSpeed ?gpuClock . \n" +
+                    "FILTER(?gpuClock >=" + constraints.gpuClockMin + ") .\n";
+        }
+        if (constraints.gpuClockMax != 0) {
+            queryString += "?gpu ont:hasClockSpeed ?gpuClock . \n" +
+                    "FILTER(?gpuClock <=" + constraints.gpuClockMax + ") .\n";
+        }
+        if (constraints.gpuVRAMMin != 0) {
+            queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
+                    "FILTER(?gpuVRAM >=" + constraints.gpuVRAMMin + ") .\n";
+        }
+        if (constraints.gpuVRAMMax != 0) {
+            queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
+                    "FILTER(?gpuVRAM <=" + constraints.gpuVRAMMax + ") .\n";
+        }
+        // RAM CONSTRAINTS
+        if (constraints.ramClockMin != 0) {
+            queryString += "?ram ont:hasClockSpeed ?ramClock . \n" +
+                    "FILTER(?ramClock >=" + constraints.ramClockMin + ") .\n";
+        }
+        if (constraints.ramClockMax != 0) {
+            queryString += "?ram ont:hasClockSpeed ?ramClock . \n" +
+                    "FILTER(?ramClock <=" + constraints.ramClockMax + ") .\n";
+        }
+        if (constraints.ramSizeMin != 0) {
+            queryString += "?ram ont:hasSizeOfRAM ?ramSize . \n" +
+                    "FILTER(?ramSize >=" + constraints.ramSizeMin + ") .\n";
+        }
+        if (constraints.ramSizeMax != 0) {
+            queryString += "?ram ont:hasSizeOfRAM ?ramSize . \n" +
+                    "FILTER(?ramSize <=" + constraints.ramSizeMax + ") .\n";
+        }
+        // STORAGE CONSTRAINTS
+        if (constraints.storageWriteSpeedMin != 0) {
+            queryString += "?storage ont:hasWriteSpeed ?storageWrite . \n" +
+                    "FILTER(?storageWrite >=" + constraints.storageWriteSpeedMin + ") .\n";
+        }
+        if (constraints.storageWriteSpeedMax != 0) {
+            queryString += "?storage ont:hasWriteSpeed ?storageWrite . \n" +
+                    "FILTER(?storageWrite <=" + constraints.storageWriteSpeedMax + ") .\n";
+        }
+        if (constraints.storageCapacityMin != 0) {
+            queryString += "?storage ont:hasCapacity ?storageSize . \n" +
+                    "FILTER(?storageSize >=" + constraints.storageCapacityMin + ") .\n";
+        }
+        if (constraints.storageCapacityMax != 0) {
+            queryString += "?storage ont:hasCapacity ?storageSize . \n" +
+                    "FILTER(?storageSize <=" + constraints.storageCapacityMax + ") .\n";
+        }
+        if (constraints.storageRPM != 0) {
+            queryString += "?storage ont:hasRPM ?storageRPM . \n" +
+                    "FILTER(?storageRPM =" + constraints.storageRPM + ") . \n";
+        }
+        return queryString += "}";
     }
 
 }
