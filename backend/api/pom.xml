@@ -49,7 +49,7 @@
 			<artifactId>jFuzzyLogic</artifactId>
 			<version>2.0.8</version>
 			<scope>system</scope>
-			<systemPath>/home/sibin/InzenjeringZnanja2023/backend/api/lib/jFuzzyLogic.jar</systemPath>
+			<systemPath>C:\Users\Dejan\Desktop\InzenjeringZnanja2023\backend\api\lib\jFuzzyLogic.jar</systemPath>
 		</dependency>
 	</dependencies>
 
