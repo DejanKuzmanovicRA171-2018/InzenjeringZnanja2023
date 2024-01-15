@@ -18,11 +18,9 @@ const Components = () => {
   const [motherboardData, setMotherboardData] = useState({});
 
   const postData = async () => {
-    const url = "your_api_endpoint"; // Replace with your actual API endpoint
+    const url = "http://localhost:8080/recommend";
 
     const requestBody = {
-      ramSlots: 4,
-
       cpuClockMin: cpuData.cpuClockMin,
       cpuClockMax: cpuData.cpuClockMax,
       cpuCoresMin: cpuData.cpuCoresMin,
@@ -30,6 +28,7 @@ const Components = () => {
       cpuThreadsMin: cpuData.cpuThreadsMin,
       cpuThreadsMax: cpuData.cpuThreadsMax,
       cpuRamSpeedType: cpuData.ramSpeedType,
+      cpuSocket: cpuData.socket,
       gpuClockMin: gpuData.gpuClockMin,
       gpuClockMax: gpuData.gpuClockMax,
       gpuVRAMMin: gpuData.gpuVRAMMin,
@@ -45,14 +44,16 @@ const Components = () => {
       storageCapacityMin: storageData.storageCapacityMin,
       storageCapacityMax: storageData.storageCapacityMax,
       storageType: storageData.storageType,
-      storageRPM: 0,
+      storageRPM: storageData.rpm,
       minimalThermalPerformance: coolingData.minThermalPerformance,
+      coolingSockets: coolingData.socket,
       minPSUPower: powerSupplyData.minPower,
       maxPSUPower: powerSupplyData.maxPower,
       minNumOfRamSlotsMb: motherboardData.minNumberOfRamSlots,
       maxNumOfRamSlotsMb: motherboardData.maxNumberOfRamSlots,
       minRamCapacityMb: motherboardData.minRamCapacity,
       maxRamCapacityMb: motherboardData.maxRamCapacity,
+      mbSocket: motherboardData.socket,
       pciEMb: motherboardData.pciE,
     };
     console.log("CAOS", requestBody);

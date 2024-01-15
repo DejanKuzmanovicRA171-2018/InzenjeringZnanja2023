@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Slider from "react-slider";
 
 const GPU = ({ onGPUChange }) => {
   const [gpuData, setGPUData] = useState({
@@ -23,18 +22,9 @@ const GPU = ({ onGPUChange }) => {
     "PCI-5V",
   ];
 
-  const handleSliderChange = (values) => {
-    setGPUData((prevData) => ({
-      ...prevData,
-      gpuClockMin: values[0],
-      gpuClockMax: values[1],
-    }));
-  };
-
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
-    // Handle checkboxes separately
     if (type === "checkbox") {
       setGPUData((prevData) => ({
         ...prevData,
@@ -59,7 +49,7 @@ const GPU = ({ onGPUChange }) => {
       <h1>GPU</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
-          <label htmlFor="gpuClockMin">GPU Clock Min:</label>
+          <label htmlFor="gpuClockMin">GPU Clock Min (MHz):</label>
           <input
             type="number"
             id="gpuClockMin"
@@ -69,7 +59,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="gpuClockMax">GPU Clock Max:</label>
+          <label htmlFor="gpuClockMax">GPU Clock Max (MHz):</label>
           <input
             type="number"
             id="gpuClockMax"
@@ -79,7 +69,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="gpuVRAMMin">GPU VRAM Min:</label>
+          <label htmlFor="gpuVRAMMin">GPU VRAM Min (GB):</label>
           <input
             type="number"
             id="gpuVRAMMin"
@@ -89,7 +79,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="gpuVRAMMax">GPU VRAM Max:</label>
+          <label htmlFor="gpuVRAMMax">GPU VRAM Max (GB):</label>
           <input
             type="number"
             id="gpuVRAMMax"
