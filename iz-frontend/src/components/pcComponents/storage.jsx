@@ -6,17 +6,19 @@ const Storage = ({ onStorageChange }) => {
     storageWriteSpeedMax: 0,
     storageCapacityMin: 0,
     storageCapacityMax: 0,
-    driveType: "SSD", // Default value
+    driveType: "SSD",
+    rpm: 0,
   });
 
   const handleChange = (event) => {
     const { name, value, type } = event.target;
 
-    // Handle radio button separately
     if (type === "radio") {
+      const newDriveType = value === "HDD" ? "HDD" : "SSD";
       setStorageData({
         ...storageData,
-        [name]: value,
+        driveType: newDriveType,
+        rpm: newDriveType === "HDD" ? storageData.rpm : 0,
       });
     } else {
       setStorageData({
@@ -37,7 +39,9 @@ const Storage = ({ onStorageChange }) => {
       <h1>Storage</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
-          <label htmlFor="storageWriteSpeedMin">Storage Write Speed Min:</label>
+          <label htmlFor="storageWriteSpeedMin">
+            Storage Write Speed Min (MB/s):
+          </label>
           <input
             type="number"
             id="storageWriteSpeedMin"
@@ -47,7 +51,9 @@ const Storage = ({ onStorageChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="storageWriteSpeedMax">Storage Write Speed Max:</label>
+          <label htmlFor="storageWriteSpeedMax">
+            Storage Write Speed Max (MB/s):
+          </label>
           <input
             type="number"
             id="storageWriteSpeedMax"
@@ -57,7 +63,7 @@ const Storage = ({ onStorageChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="storageCapacityMin">Storage Capacity Min:</label>
+          <label htmlFor="storageCapacityMin">Storage Capacity Min (GB):</label>
           <input
             type="number"
             id="storageCapacityMin"
@@ -67,7 +73,7 @@ const Storage = ({ onStorageChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="storageCapacityMax">Storage Capacity Max:</label>
+          <label htmlFor="storageCapacityMax">Storage Capacity Max (GB):</label>
           <input
             type="number"
             id="storageCapacityMax"
@@ -101,6 +107,19 @@ const Storage = ({ onStorageChange }) => {
             <label htmlFor="hdd">HDD</label>
           </div>
         </div>
+
+        {storageData.driveType === "HDD" && (
+          <div>
+            <label htmlFor="rpm">RPM: </label>
+            <input
+              type="number"
+              id="rpm"
+              name="rpm"
+              value={storageData.rpm}
+              onChange={handleChange}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

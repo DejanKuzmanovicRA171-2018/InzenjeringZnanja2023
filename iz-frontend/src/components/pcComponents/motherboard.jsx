@@ -8,18 +8,18 @@ const Motherboard = ({ onMotherboardChange }) => {
     "AM3+",
     "AM4",
     "AM5",
-    "Intel1150",
-    "Intel1151",
-    "Intel1155",
-    "Intel1156",
-    "Intel1168",
-    "Intel1200",
-    "Intel1366",
-    "Intel1700",
-    "Intel2011_3",
-    "Intel2066",
-    "Intel4677",
-    "LGA775",
+    "Intel 1150",
+    "Intel 1151",
+    "Intel 1155",
+    "Intel 1156",
+    "Intel 1168",
+    "Intel 1200",
+    "Intel 1366",
+    "Intel 1700",
+    "Intel 2011-3",
+    "Intel 2066",
+    "Intel 4677",
+    "LGA 775",
     "SP5",
     "sTR5",
   ];
@@ -52,7 +52,6 @@ const Motherboard = ({ onMotherboardChange }) => {
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
-    // Handle checkboxes and select separately
     if (type === "checkbox") {
       setMotherboardData((prevData) => ({
         ...prevData,
@@ -96,7 +95,7 @@ const Motherboard = ({ onMotherboardChange }) => {
         />
       </div>
       <div>
-        <label htmlFor="minRamCapacity">Min RAM Capacity:</label>
+        <label htmlFor="minRamCapacity">Min RAM Capacity (GB):</label>
         <input
           type="number"
           id="minRamCapacity"
@@ -106,7 +105,7 @@ const Motherboard = ({ onMotherboardChange }) => {
         />
       </div>
       <div>
-        <label htmlFor="maxRamCapacity">Max RAM Capacity:</label>
+        <label htmlFor="maxRamCapacity">Max RAM Capacity (GB):</label>
         <input
           type="number"
           id="maxRamCapacity"
@@ -132,7 +131,7 @@ const Motherboard = ({ onMotherboardChange }) => {
         ))}
       </div>
       <div>
-        <label htmlFor="socket">Socket:</label>
+        <label htmlFor="socket">Socket: </label>
         <select
           id="socket"
           name="socket"

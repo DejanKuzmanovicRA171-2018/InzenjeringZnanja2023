@@ -1,6 +1,29 @@
 import React, { useState, useEffect } from "react";
 
 const CPU = ({ onCPUChange }) => {
+  const socketOptions = [
+    "AM2",
+    "AM2+",
+    "AM3",
+    "AM3+",
+    "AM4",
+    "AM5",
+    "Intel 1150",
+    "Intel 1151",
+    "Intel 1155",
+    "Intel 1156",
+    "Intel 1168",
+    "Intel 1200",
+    "Intel 1366",
+    "Intel 1700",
+    "Intel 2011-3",
+    "Intel 2066",
+    "Intel 4677",
+    "LGA 775",
+    "SP5",
+    "sTR5",
+  ];
+  const ramSpeedOptions = ["DDR1", "DDR2", "DDR3", "DDR4", "DDR5"];
   const [cpuData, setCPUData] = useState({
     cpuClockMin: 0,
     cpuClockMax: 0,
@@ -11,9 +34,14 @@ const CPU = ({ onCPUChange }) => {
     socket: "",
     ramSpeedType: "",
   });
-  const ramSpeedOptions = ["DDR1", "DDR2", "DDR3", "DDR4", "DDR5"];
+
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    if (name === "socket" && !socketOptions.includes(value)) {
+      return;
+    }
+
     setCPUData({
       ...cpuData,
       [name]: value,
@@ -21,6 +49,7 @@ const CPU = ({ onCPUChange }) => {
 
     onCPUChange(cpuData);
   };
+
   useEffect(() => {
     onCPUChange(cpuData);
   }, [cpuData, onCPUChange]);
@@ -30,7 +59,7 @@ const CPU = ({ onCPUChange }) => {
       <h1>CPU</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
-          <label htmlFor="cpuClockMin">CPU Clock Min:</label>
+          <label htmlFor="cpuClockMin">CPU Clock Min (MHz):</label>
           <input
             type="number"
             id="cpuClockMin"
@@ -40,7 +69,7 @@ const CPU = ({ onCPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="cpuClockMax">CPU Clock Max:</label>
+          <label htmlFor="cpuClockMax">CPU Clock Max (MHz):</label>
           <input
             type="number"
             id="cpuClockMax"
@@ -90,14 +119,20 @@ const CPU = ({ onCPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="socket">Socket:</label>
-          <input
-            type="text"
+          <label htmlFor="socket">Socket: </label>
+          <select
             id="socket"
             name="socket"
             value={cpuData.socket}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Socket</option>
+            {socketOptions.map((socket) => (
+              <option key={socket} value={socket}>
+                {socket}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor="ramSpeedType">Compatible with RAM type:</label>

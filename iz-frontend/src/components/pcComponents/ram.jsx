@@ -44,7 +44,7 @@ const RAM = ({ onRamChange }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
-          <label htmlFor="ramClockMin">RAM Clock Min:</label>
+          <label htmlFor="ramClockMin">RAM Clock Min (MHz):</label>
           <input
             type="number"
             id="ramClockMin"
@@ -54,7 +54,7 @@ const RAM = ({ onRamChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="ramClockMax">RAM Clock Max:</label>
+          <label htmlFor="ramClockMax">RAM Clock Max (MHz):</label>
           <input
             type="number"
             id="ramClockMax"
@@ -64,7 +64,7 @@ const RAM = ({ onRamChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="ramSizeMin">RAM Size Min:</label>
+          <label htmlFor="ramSizeMin">RAM Size Min (GB):</label>
           <input
             type="number"
             id="ramSizeMin"
@@ -74,7 +74,7 @@ const RAM = ({ onRamChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="ramSizeMax">RAM Size Max:</label>
+          <label htmlFor="ramSizeMax">RAM Size Max (GB):</label>
           <input
             type="number"
             id="ramSizeMax"
