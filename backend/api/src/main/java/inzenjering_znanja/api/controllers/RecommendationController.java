@@ -16,7 +16,7 @@ public class RecommendationController {
     RecommendationService recService;
 
     @PostMapping("/recommend")
-    public List<String> recommendComponents(@RequestBody RecommendDTO req) {
+    public String recommendComponents(@RequestBody RecommendDTO req) {
         return recService.recommendComponents(req);
     }
 

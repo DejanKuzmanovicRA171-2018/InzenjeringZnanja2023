@@ -13,7 +13,7 @@ public class RecommendationService {
     ExecuteQueryService eqService;
     private String ontUri = "http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#";
 
-    public List<String> recommendComponents(RecommendDTO constraints) {
+    public String recommendComponents(RecommendDTO constraints) {
 
         // Start buliding query
         String queryString = "PREFIX ont:<" + ontUri + ">\n" +
@@ -31,8 +31,8 @@ public class RecommendationService {
         queryString = appendConstraintsToQueryString(queryString, constraints);
         System.out.println(queryString);
         // Execute query
-        List<String> resultList = eqService.executeRecommendQuery(queryString);
-        return resultList;
+        String result = eqService.executeRecommendQuery(queryString);
+        return result;
     }
 
     private String appendConstraintsToQueryString(String queryString, RecommendDTO constraints) {
@@ -78,6 +78,10 @@ public class RecommendationService {
             queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
                     "FILTER(?gpuVRAM <=" + constraints.gpuVRAMMax + ") .\n";
         }
+        if (constraints.gpuPciE != "") {
+            queryString += "?gpu ont:hasPCI-E ?gpuPciE . \n" +
+                    "FILTER(?gpuPciE =" + constraints.gpuPciE + ") .\n";
+        }
         // RAM CONSTRAINTS
         if (constraints.ramClockMin != 0) {
             queryString += "?ram ont:hasClockSpeed ?ramClock . \n" +
@@ -94,6 +98,10 @@ public class RecommendationService {
         if (constraints.ramSizeMax != 0) {
             queryString += "?ram ont:hasSizeOfRAM ?ramSize . \n" +
                     "FILTER(?ramSize <=" + constraints.ramSizeMax + ") .\n";
+        }
+        if (constraints.ramSpeedType != "") {
+            queryString += "?ram ont:hasRAMSpeedType ?ramSpeedType . \n" +
+                    "FILTER(?ramSpeedType = '" + constraints.ramSpeedType + "') .\n";
         }
         // STORAGE CONSTRAINTS
         if (constraints.storageWriteSpeedMin != 0) {
@@ -112,9 +120,35 @@ public class RecommendationService {
             queryString += "?storage ont:hasCapacity ?storageSize . \n" +
                     "FILTER(?storageSize <=" + constraints.storageCapacityMax + ") .\n";
         }
-        if (constraints.storageRPM != 0) {
+        if (constraints.storageType == "HDD") {
             queryString += "?storage ont:hasRPM ?storageRPM . \n" +
                     "FILTER(?storageRPM =" + constraints.storageRPM + ") . \n";
+        }
+        // COOLING constraints
+        if (constraints.minimalThermalPerformance != 0) {
+            queryString += "?cooling ont:hasPower ?coolerTDP . \n" +
+                    "FILTER(?coolerTDP >=" + constraints.minimalThermalPerformance + ") . \n";
+        }
+        // MOTHERBOARD constraints
+        if (constraints.minNumOfRamSlotsMb != 0) {
+            queryString += "?motherboard ont:hasNumberOfRAMSlots ?ramSlots . \n" +
+                    "FILTER(?ramSlots >=" + constraints.minNumOfRamSlotsMb + ") . \n";
+        }
+        if (constraints.maxNumOfRamSlotsMb != 0) {
+            queryString += "?motherboard ont:hasNumberOfRAMSlots ?ramSlots . \n" +
+                    "FILTER(?ramSlots <=" + constraints.maxNumOfRamSlotsMb + ") . \n";
+        }
+        if (constraints.minRamCapacityMb != 0) {
+            queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
+                    "FILTER(?ramCapacity >=" + constraints.minRamCapacityMb + ") . \n";
+        }
+        if (constraints.maxNumOfRamSlotsMb != 0) {
+            queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
+                    "FILTER(?ramCapacity <=" + constraints.maxRamCapacityMb + ") . \n";
+        }
+        for (int i = 0; i < constraints.pciEMb.length; i++) {
+            queryString += "?motherboard ont:hasPCI-E ?pciESlot . \n" +
+                    "FILTER(?pciESlot = '" + constraints.pciEMb[i] + "') . \n";
         }
         return queryString += "}";
     }
