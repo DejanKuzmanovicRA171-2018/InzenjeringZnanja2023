@@ -2011,7 +2011,14 @@
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#isCompatibleWithMotherboardType -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#isCompatibleWithMotherboardType">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Motherboard"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
         <rdfs:range>
             <rdfs:Datatype>
                 <owl:oneOf>
@@ -2053,6 +2060,7 @@
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Case"/>
                     <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Motherboard"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#PowerSupply"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -4185,6 +4193,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#AZZA_808B-M_SFFCase">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFFCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4194,6 +4206,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Apevia_SPIRIT600W_Spirit_600W_ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">600</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4208,6 +4221,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4221,6 +4235,7 @@
         <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4234,6 +4249,7 @@
         <computer-ontology-classes:hasPCI-E>2.0x16</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasSocket>AM2</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4249,6 +4265,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR2</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>LGA 775</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4261,7 +4278,9 @@
         <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasPCI-E>3.0x4</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</computer-ontology-classes:hasRAMCapacity>
+        <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1151</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4275,6 +4294,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1150</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4290,6 +4310,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1155</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4303,6 +4324,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">24</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1366</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4316,6 +4338,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4329,6 +4352,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR1</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>LGA 775</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4341,6 +4365,7 @@
         <computer-ontology-classes:hasPCI-E>PCI-5V</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasSocket>LGA 775</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4349,6 +4374,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Black_Mini_MATX_Mesh_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MiniTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4357,6 +4386,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CORN_GYZ_-_Full_Perspective_PC_Gaming_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MiniTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4365,6 +4398,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CORSAIR_2000D_AIRFLOW_Mini-ITX_PC_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFFCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4373,6 +4410,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CORSAIR_iCUE_2000D_RGB_AIRFLOW_Mini-ITX_PC">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFFCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4381,6 +4422,11 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#CORSAIR_iCUE_7000X_RGB_Full-Tower_ATX_PC_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FullTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4445,6 +4491,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Corsair_iCUE_4000X_RGB_CC-9011204-WW_Black_Steel">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MidTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4454,6 +4504,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Cybenetics_Platinum_1000W_SFX12V">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1000</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4463,6 +4514,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Cybenetics_Platinum_600W_Flex_ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">600</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4511,6 +4563,11 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#DeepCool_MORPHEUS_ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FullTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4520,6 +4577,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ET450-B">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">450</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4534,6 +4592,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1151</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4543,6 +4602,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Extreme_1200R_Platinum">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1200</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4552,6 +4612,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Extreme_350_Bronze">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">350</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4561,6 +4622,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FSP220-60LE_Flex_ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">220</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4570,6 +4632,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FX350-G">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">350</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4578,6 +4641,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Fractal_Design_North_ATX_mATX_Mid_Tower_PC_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MidTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4586,6 +4653,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Fractal_Design_Terra_Jade_Mini-ITX_Small_Form_Factor_PC_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFFCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4607,6 +4678,11 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GAMEMAX_Abyss_TR_Black_Steel">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FullTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4616,6 +4692,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#GOLDEN_FIELD_AZ650W_Power_Supply">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">650</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4670,6 +4747,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4684,6 +4762,7 @@
         <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">64</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4698,6 +4777,7 @@
         <computer-ontology-classes:hasPCI-E>2.0x4</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">24</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasSocket>Intel 1366</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -4793,6 +4873,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#IN_WIN_EFS052.CH450TB3_Black_Mini_Tower_Computer_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MiniTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -4801,6 +4885,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#In_Win_EM013_Mini_Tower_6_Bay_Chassis">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MiniTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5159,6 +5246,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MSI_-_MPG_A1000G">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1000</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5168,6 +5256,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MSI_MAG_A650BN_650W_ATX_80">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">650</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5194,6 +5283,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>AM3</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -5267,6 +5357,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NZXT_H9_Flow_-_All_Black_-_CM-H91FB-01_-_Dual-Chamber_Mid-Tower">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MidTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5289,6 +5383,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Phanteks_AMP_1000W_V2_80PLUS_Gold">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1000</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5297,6 +5392,11 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Phanteks_Enthoo_Pro_2_Full_Tower">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FullTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5319,6 +5419,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ST30SF">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">300</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5328,6 +5429,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ST40F-ESB">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">400</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5337,6 +5439,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SX1000_Platinum_1000w">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1000</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5346,6 +5449,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SX300-B">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">300</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5355,6 +5459,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SX750_Gold_80_PLUS_Gold_750W">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">750</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5364,6 +5469,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SX800-LTI">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SFXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">800</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>SFXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5439,6 +5545,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SilverStone_Technology_350_Watt_Flex_ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">350</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5448,6 +5555,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#SilverStone_Technology_FX600">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">600</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5525,6 +5633,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#80_PLUS_Gold_500W_Flex-ATX">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FlexATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">500</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>FlexATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5538,6 +5647,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1151</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -5551,6 +5661,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">16</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1150</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -5565,6 +5676,7 @@
         <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
         <computer-ontology-classes:hasRAMSpeedType>DDR3</computer-ontology-classes:hasRAMSpeedType>
         <computer-ontology-classes:hasSocket>Intel 1155</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
     </owl:NamedIndividual>
     
 
@@ -5598,6 +5710,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MONTECH,_KING_95_Dual-Chamber_ATX_Mid-Tower">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MidTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5606,6 +5722,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MONTECH,_KING_95_Dual-Chamber_ATX_Mid-Tower_PC_Gaming_Case">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MidTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5614,6 +5734,11 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Phanteks_NV7,_Showcase_Full-Tower_Chassis">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#FullTowerCase"/>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>ATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>EATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MiniITXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
@@ -5623,6 +5748,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Super_Flower_Leadex_VII_XG_850W_80+_Gold">
         <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#ATXPowerSupply"/>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">850</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:isCompatibleWithPSUType>ATXPowerSupply</computer-ontology-classes:isCompatibleWithPSUType>
     </owl:NamedIndividual>
     
 
