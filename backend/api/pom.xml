@@ -51,6 +51,11 @@
 			<scope>system</scope>
 			<systemPath>X:\GitRepos\InzenjeringZnanja2023\backend\api\lib\jFuzzyLogic.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>es.ucm.fdi.gaia</groupId>
+			<artifactId>jCOLIBRI</artifactId>
+			<version>3.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -16,6 +16,8 @@ import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.riot.RDFDataMgr;
 import org.springframework.stereotype.Service;
 
+import inzenjering_znanja.api.DTO.RecommendDTO;
+
 @Service
 public class ExecuteQueryService {
     public String queryTest = "PREFIX ont:<http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#> SELECT ?cpu WHERE { ?cpu a ont:CPU}";
@@ -45,7 +47,7 @@ public class ExecuteQueryService {
         infModel = ModelFactory.createInfModel(reasoner, model);
     }
 
-    public String executeRecommendQuery(String queryString) {
+    public String executeRecommendQuery(String queryString, RecommendDTO constraints) {
         Query query = QueryFactory.create(queryString);
         List<List<String>> allConfigs = new ArrayList<>();
         String result = "";
@@ -84,8 +86,23 @@ public class ExecuteQueryService {
                     "    BIND(ont:" + config.get(1) + " AS ?gpu) .\n" + //
                     "    BIND(ont:" + config.get(3) + " AS ?motherboard).\n" + //
                     "    BIND(ont:" + config.get(2) + " AS ?ram).\n" + //
-                    "    BIND(ont:" + config.get(4) + " AS ?storage) .\n" + //
-                    "    ?cpu ont:hasPower ?cpuPower .\n" + //
+                    "    BIND(ont:" + config.get(4) + " AS ?storage) .\n";
+            // COOLING constraints
+            if (constraints.minimalThermalPerformance != 0) {
+                queryCasePSUString += "?cooling ont:hasPower ?coolerTDP . \n" +
+                        "FILTER(?coolerTDP >=" + constraints.minimalThermalPerformance + ") . \n";
+            }
+            if (constraints.coolingSockets.length > 0) {
+                queryCasePSUString += "?cooling ont:hasSocket ?socket .\n" +
+                        "FILTER(";
+                for (int i = 0; i < constraints.coolingSockets.length; i++) {
+                    queryCasePSUString += i > 0 ? " || " : "";
+                    queryCasePSUString += "?socket ='" + constraints.coolingSockets[i] + "'";
+                }
+                queryCasePSUString += "). \n";
+
+            }
+            queryCasePSUString += "?cpu ont:hasPower ?cpuPower .\n" + //
                     "    ?gpu ont:hasPower ?gpuPower .\n" + //
                     "    ?psu ont:hasPower ?psuPower.\n" + //
                     "    FILTER ( ( ?cpuPower + ?gpuPower ) <= ?psuPower ).\n" + //
@@ -124,5 +141,58 @@ public class ExecuteQueryService {
         }
 
         return result;
+    }
+
+    public List<List<Double>> executeGetAllConfigsQuery() {
+        String queryString = queryPrefix +
+                "SELECT ?cpu ?gpu ?ram ?motherboard ?storage\n" +
+                "WHERE {\n" +
+                "?cpu a ont:CPU. ?gpu a ont:GPU. ?ram a ont:RAM. ?motherboard a ont:Motherboard. ?storage a ont:Storage.\n"
+                +
+                "?gpu ont:hasPCI-E ?gc. ?motherboard ont:hasPCI-E ?gc. \n" +
+                "?cpu ont:hasSocket ?socket. ?motherboard ont:hasSocket ?socket.\n" +
+                "?ram ont:hasRAMSpeedType ?ramSpeed. ?motherboard ont:hasRAMSpeedType ?ramSpeed. ?cpu ont:hasRAMSpeedType ?ramSpeed. ?ram ont:hasNumberOfRAMSlots ?ramSlotsR. ?motherboard ont:hasNumberOfRAMSlots ?ramSlotsM. FILTER(?ramSlotsR <= ?ramSlotsM). \n"
+                +
+                "?motherboard ont:hasRAMCapacity ?ramCapacityM. ?ram ont:hasSizeOfRAM ?ramCapacityR. \n" +
+                "FILTER(?ramCapacityR <= ?ramCapacityM).\n";
+        System.out.println(queryString);
+        Query query = QueryFactory.create(queryString);
+        List<List<Double>> allConfigs = new ArrayList<>();
+        // Execute the query on the inferred model
+        try (QueryExecution queryExecution = QueryExecutionFactory.create(query, infModel)) {
+            ResultSet results = queryExecution.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                List<Double> features = extractFeatures(solution);
+                allConfigs.add(features);
+            }
+        } catch (Exception e) {
+            // Log or handle the exception
+            e.printStackTrace();
+            return null;
+        }
+        return allConfigs;
+    }
+
+    private static List<Double> extractFeatures(QuerySolution solution) {
+        List<Double> features = new ArrayList<>();
+
+        double cpuClockSpeed = solution.getLiteral("cpuClockSpeed").getDouble();
+        double cpuCores = solution.getLiteral("cpuCores").getDouble();
+        double gpuClockSpeed = solution.getLiteral("gpuClockSpeed").getDouble();
+        double gpuCores = solution.getLiteral("gpuCores").getDouble();
+        double ramSize = solution.getLiteral("ramSize").getDouble();
+        double storageSize = solution.getLiteral("storageSize").getDouble();
+        double writeSpeed = solution.getLiteral("writeSpeed").getDouble();
+
+        features.add(cpuClockSpeed);
+        features.add(cpuCores);
+        features.add(gpuClockSpeed);
+        features.add(gpuCores);
+        features.add(ramSize);
+        features.add(storageSize);
+        features.add(writeSpeed);
+
+        return features;
     }
 }

@@ -6,7 +6,7 @@ const GPU = ({ onGPUChange }) => {
     gpuClockMax: 7000,
     gpuVRAMMin: 0,
     gpuVRAMMax: 0,
-    pciE: [],
+    pciE: "",
   });
 
   const pciEOptions = [
@@ -23,21 +23,12 @@ const GPU = ({ onGPUChange }) => {
   ];
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value } = event.target;
 
-    if (type === "checkbox") {
-      setGPUData((prevData) => ({
-        ...prevData,
-        [name]: checked
-          ? [...prevData[name], value]
-          : prevData[name].filter((v) => v !== value),
-      }));
-    } else {
-      setGPUData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    setGPUData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -89,20 +80,20 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="pciE">Has PCI-E:</label>
-          {pciEOptions.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                name="pciE"
-                value={option}
-                checked={gpuData.pciE.includes(option)}
-                onChange={handleChange}
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
+          <label htmlFor="pciE">PCI-E:</label>
+          <select
+            id="pciE"
+            name="pciE"
+            value={gpuData.pciE}
+            onChange={handleChange}
+          >
+            <option value="">Select PCI-E</option>
+            {pciEOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>

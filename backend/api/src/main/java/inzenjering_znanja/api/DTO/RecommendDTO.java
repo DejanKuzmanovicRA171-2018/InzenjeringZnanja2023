@@ -8,12 +8,13 @@ public class RecommendDTO {
     public int cpuCoresMax;
     public int cpuThreadsMin;
     public int cpuThreadsMax;
+    public String cpuSocket;
     // GPU constraints
     public int gpuClockMin;
     public int gpuClockMax;
     public int gpuVRAMMin;
     public int gpuVRAMMax;
-    public String gpuPciE;
+    public String pciEGPU;
     // RAM constraints
     public int ramClockMin;
     public int ramClockMax;
@@ -29,6 +30,7 @@ public class RecommendDTO {
     public int storageRPM;
     // COOLING constraints
     public int minimalThermalPerformance;
+    public String[] coolingSockets;
     // PSU constraints
     public int minPSUPower;
     public int maxPSUPower;
@@ -37,5 +39,6 @@ public class RecommendDTO {
     public int maxNumOfRamSlotsMb;
     public int minRamCapacityMb;
     public int maxRamCapacityMb;
+    public String mbSocket;
     public String[] pciEMb;
 }

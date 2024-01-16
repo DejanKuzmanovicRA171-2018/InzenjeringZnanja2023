@@ -1,11 +1,15 @@
 package inzenjering_znanja.api.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import inzenjering_znanja.api.DTO.RecommendDTO;
+import inzenjering_znanja.api.Helpers.EuclideanDistanceCalculator;
 
 @Service
 public class RecommendationService {
@@ -22,7 +26,7 @@ public class RecommendationService {
                 "?cpu a ont:CPU. ?gpu a ont:GPU. ?ram a ont:RAM. ?motherboard a ont:Motherboard. ?storage a ont:Storage.\n"
                 +
                 "?gpu ont:hasPCI-E ?gc. ?motherboard ont:hasPCI-E ?gc. \n" +
-                "?cpu ont:hasSocket ?socket. ?motherboard ont:hasSocket ?socket. \n" +
+                "?cpu ont:hasSocket ?socket. ?motherboard ont:hasSocket ?socket.\n" +
                 "?ram ont:hasRAMSpeedType ?ramSpeed. ?motherboard ont:hasRAMSpeedType ?ramSpeed. ?cpu ont:hasRAMSpeedType ?ramSpeed. ?ram ont:hasNumberOfRAMSlots ?ramSlotsR. ?motherboard ont:hasNumberOfRAMSlots ?ramSlotsM. FILTER(?ramSlotsR <= ?ramSlotsM). \n"
                 +
                 "?motherboard ont:hasRAMCapacity ?ramCapacityM. ?ram ont:hasSizeOfRAM ?ramCapacityR. \n" +
@@ -31,7 +35,7 @@ public class RecommendationService {
         queryString = appendConstraintsToQueryString(queryString, constraints);
         System.out.println(queryString);
         // Execute query
-        String result = eqService.executeRecommendQuery(queryString);
+        String result = eqService.executeRecommendQuery(queryString, constraints);
         return result;
     }
 
@@ -61,6 +65,10 @@ public class RecommendationService {
             queryString += "?cpu ont:hasNumberOfThreads ?cpuThreads . \n" +
                     "FILTER(?cpuThreads <=" + constraints.cpuThreadsMax + ") .\n";
         }
+        if (constraints.cpuSocket != "") {
+            queryString += "?cpu ont:hasSocket ?cpuSocket . \n" +
+                    "FILTER(?cpuSocket = '" + constraints.cpuSocket + "') .\n";
+        }
         // GPU CONSTRAINTS
         if (constraints.gpuClockMin != 0) {
             queryString += "?gpu ont:hasClockSpeed ?gpuClock . \n" +
@@ -78,9 +86,9 @@ public class RecommendationService {
             queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
                     "FILTER(?gpuVRAM <=" + constraints.gpuVRAMMax + ") .\n";
         }
-        if (constraints.gpuPciE != "") {
+        if (constraints.pciEGPU != "") {
             queryString += "?gpu ont:hasPCI-E ?gpuPciE . \n" +
-                    "FILTER(?gpuPciE =" + constraints.gpuPciE + ") .\n";
+                    "FILTER(?gpuPciE ='" + constraints.pciEGPU + "') .\n";
         }
         // RAM CONSTRAINTS
         if (constraints.ramClockMin != 0) {
@@ -124,11 +132,6 @@ public class RecommendationService {
             queryString += "?storage ont:hasRPM ?storageRPM . \n" +
                     "FILTER(?storageRPM =" + constraints.storageRPM + ") . \n";
         }
-        // COOLING constraints
-        if (constraints.minimalThermalPerformance != 0) {
-            queryString += "?cooling ont:hasPower ?coolerTDP . \n" +
-                    "FILTER(?coolerTDP >=" + constraints.minimalThermalPerformance + ") . \n";
-        }
         // MOTHERBOARD constraints
         if (constraints.minNumOfRamSlotsMb != 0) {
             queryString += "?motherboard ont:hasNumberOfRAMSlots ?ramSlots . \n" +
@@ -150,7 +153,38 @@ public class RecommendationService {
             queryString += "?motherboard ont:hasPCI-E ?pciESlot . \n" +
                     "FILTER(?pciESlot = '" + constraints.pciEMb[i] + "') . \n";
         }
+        if (constraints.mbSocket != "") {
+            queryString += "?motherboard ont:hasSocket ?mbSocket . \n" +
+                    "FILTER(?mbSocket ='" + constraints.mbSocket + "') . \n";
+        }
         return queryString += "}";
+    }
+
+    public List<Double> mostSimilarPC(List<Double> targetConfig) {
+        List<List<Double>> configs = eqService.executeGetAllConfigsQuery();
+        List<Double> distances = calculateDistances(targetConfig, configs);
+        return getTopConfiguration(distances, configs);
+    }
+
+    private static List<Double> calculateDistances(List<Double> targetConfiguration,
+            List<List<Double>> configurations) {
+        List<Double> distances = new ArrayList<>();
+
+        for (List<Double> configuration : configurations) {
+            double distance = EuclideanDistanceCalculator.calculateEuclideanDistance(targetConfiguration,
+                    configuration);
+            distances.add(distance);
+        }
+
+        return distances;
+    }
+
+    private static List<Double> getTopConfiguration(List<Double> distances, List<List<Double>> configurations) {
+        // Find the index with the smallest distance (top configuration)
+        int topIndex = distances.indexOf(Collections.min(distances));
+
+        // Return the top configuration
+        return configurations.get(topIndex);
     }
 
 }
