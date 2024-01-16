@@ -22,7 +22,7 @@ import inzenjering_znanja.api.DTO.RecommendDTO;
 public class ExecuteQueryService {
     public String queryTest = "PREFIX ont:<http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#> SELECT ?cpu WHERE { ?cpu a ont:CPU}";
     public String rdfFilePath = "X:/GitRepos/InzenjeringZnanja2023/computer-ontology-classes.rdf";
-    public String altPath = "C:/Users/sibin/Downloads/computer-ontology-classes.rdf";
+    public String altPath = "C:/Users/Dejan/Desktop/computer-ontology-classes.rdf";
     public String queryPrefix = "PREFIX ont: <http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#>\n"
             +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -118,7 +118,7 @@ public class ExecuteQueryService {
                     "    ?motherboard ont:isCompatibleWithMotherboardType ?mbT2.\n" + //
                     "    FILTER(?mbT1 = ?mbT2).\n" +
                     "}";
-            System.out.println(queryCasePSUString);
+            //System.out.println(queryCasePSUString);
             Query queryCasePSU = QueryFactory.create(queryCasePSUString);
             try (QueryExecution qe = QueryExecutionFactory.create(queryCasePSU, infModel)) {
                 ResultSet results = qe.execSelect();

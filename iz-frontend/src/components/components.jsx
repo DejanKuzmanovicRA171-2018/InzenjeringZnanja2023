@@ -16,52 +16,72 @@ const Components = () => {
   const [coolingData, setCoolingData] = useState({});
   const [powerSupplyData, setPowerSupplyData] = useState({});
   const [motherboardData, setMotherboardData] = useState({});
-
+  const [recComponents, setRecComponents] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const labels = [
+    "Processor: ",
+    "GPU: ",
+    "RAM: ",
+    "Motherboard: ",
+    "Storage: ",
+    "Power supply: ",
+    "Case: ",
+    "Cooling: ",
+  ];
   const postData = async () => {
+    setLoading(true);
     const url = "http://localhost:8080/recommend";
 
     const requestBody = {
-      cpuClockMin: cpuData.cpuClockMin,
-      cpuClockMax: cpuData.cpuClockMax,
-      cpuCoresMin: cpuData.cpuCoresMin,
-      cpuCoresMax: cpuData.cpuCoresMax,
-      cpuThreadsMin: cpuData.cpuThreadsMin,
-      cpuThreadsMax: cpuData.cpuThreadsMax,
+      cpuClockMin: cpuData.cpuClockMin || 0,
+      cpuClockMax: cpuData.cpuClockMax || 0,
+      cpuCoresMin: cpuData.cpuCoresMin || 0,
+      cpuCoresMax: cpuData.cpuCoresMax || 0,
+      cpuThreadsMin: cpuData.cpuThreadsMin || 0,
+      cpuThreadsMax: cpuData.cpuThreadsMax || 0,
       cpuRamSpeedType: cpuData.ramSpeedType,
       cpuSocket: cpuData.socket,
-      gpuClockMin: gpuData.gpuClockMin,
-      gpuClockMax: gpuData.gpuClockMax,
-      gpuVRAMMin: gpuData.gpuVRAMMin,
-      gpuVRAMMax: gpuData.gpuVRAMMax,
+      gpuClockMin: gpuData.gpuClockMin || 0,
+      gpuClockMax: gpuData.gpuClockMax || 0,
+      gpuVRAMMin: gpuData.gpuVRAMMin || 0,
+      gpuVRAMMax: gpuData.gpuVRAMMax || 0,
       pciEGPU: gpuData.pciE,
-      ramClockMin: ramData.ramClockMin,
-      ramClockMax: ramData.ramClockMax,
-      ramSizeMin: ramData.ramSizeMin,
-      ramSizeMax: ramData.ramSizeMax,
+      ramClockMin: ramData.ramClockMin || 0,
+      ramClockMax: ramData.ramClockMax || 0,
+      ramSizeMin: ramData.ramSizeMin || 0,
+      ramSizeMax: ramData.ramSizeMax || 0,
       ramSpeedType: ramData.ramSpeedType,
-      storageWriteSpeedMin: storageData.storageWriteSpeedMin,
-      storageWriteSpeedMax: storageData.storageWriteSpeedMax,
-      storageCapacityMin: storageData.storageCapacityMin,
-      storageCapacityMax: storageData.storageCapacityMax,
-      storageType: storageData.storageType,
-      storageRPM: storageData.rpm,
-      minimalThermalPerformance: coolingData.minThermalPerformance,
+      storageWriteSpeedMin: storageData.storageWriteSpeedMin || 0,
+      storageWriteSpeedMax: storageData.storageWriteSpeedMax || 0,
+      storageCapacityMin: storageData.storageCapacityMin || 0,
+      storageCapacityMax: storageData.storageCapacityMax || 0,
+      storageType: storageData.driveType,
+      storageRPM: storageData.rpm || 0,
+      minimalThermalPerformance: coolingData.minThermalPerformance || 0,
       coolingSockets: coolingData.socket,
-      minPSUPower: powerSupplyData.minPower,
-      maxPSUPower: powerSupplyData.maxPower,
-      minNumOfRamSlotsMb: motherboardData.minNumberOfRamSlots,
-      maxNumOfRamSlotsMb: motherboardData.maxNumberOfRamSlots,
-      minRamCapacityMb: motherboardData.minRamCapacity,
-      maxRamCapacityMb: motherboardData.maxRamCapacity,
+      minPSUPower: powerSupplyData.minPower || 0,
+      maxPSUPower: powerSupplyData.maxPower || 0,
+      minNumOfRamSlotsMb: motherboardData.minNumberOfRamSlots || 0,
+      maxNumOfRamSlotsMb: motherboardData.maxNumberOfRamSlots || 0,
+      minRamCapacityMb: motherboardData.minRamCapacity || 0,
+      maxRamCapacityMb: motherboardData.maxRamCapacity || 0,
       mbSocket: motherboardData.socket,
       pciEMb: motherboardData.pciE,
     };
     console.log("CAOS", requestBody);
     try {
+      setRecComponents(null);
+
       const response = await axios.post(url, requestBody);
       console.log("POST request successful:", response.data);
+      if (response.data === "") {
+        alert("No pc configuration matches provided requirements");
+      }
+      setRecComponents(response.data);
     } catch (error) {
       console.error("Error making POST request:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,7 +146,20 @@ const Components = () => {
           <PowerSupply onPowerSupplyChange={handlePowerSupplyChange} />
         </div>
       </div>
+
       <button onClick={postData}>Send POST Request</button>
+      {loading ? <p>Loading...</p> : null}
+      {recComponents && (
+        <div>
+          <h2>Recommended Components:</h2>
+          {recComponents.split(" || ").map((result, index) => (
+            <p key={index}>
+              <strong>{labels[index]}</strong>
+              {result}
+            </p>
+          ))}
+        </div>
+      )}
     </>
   );
 };

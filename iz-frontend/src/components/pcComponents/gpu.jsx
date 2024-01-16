@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const GPU = ({ onGPUChange }) => {
   const [gpuData, setGPUData] = useState({
     gpuClockMin: 0,
-    gpuClockMax: 7000,
+    gpuClockMax: 0,
     gpuVRAMMin: 0,
     gpuVRAMMax: 0,
     pciE: "",
@@ -60,7 +60,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="gpuVRAMMin">GPU VRAM Min (GB):</label>
+          <label htmlFor="gpuVRAMMin">GPU VRAM Min (Mb):</label>
           <input
             type="number"
             id="gpuVRAMMin"
@@ -70,7 +70,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="gpuVRAMMax">GPU VRAM Max (GB):</label>
+          <label htmlFor="gpuVRAMMax">GPU VRAM Max (Mb):</label>
           <input
             type="number"
             id="gpuVRAMMax"
