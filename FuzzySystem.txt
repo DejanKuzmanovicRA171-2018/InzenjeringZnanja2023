@@ -1,0 +1,134 @@
+FUNCTION_BLOCK fuzzyLogic
+
+VAR_INPUT               
+	RAMCapacity : REAL;
+	RAMClockSpeed: REAL;
+	CPUCores: REAL;
+	GPUClockSpeed: REAL;
+	GPUVRAM : REAL;
+	StorageCapacity: REAL;
+	CoolerTDP : REAL;
+	
+END_VAR
+
+VAR_OUTPUT  
+	Gaming : REAL;            
+	Work : REAL;
+	Home : REAL;
+	Hosting : REAL;
+	Mining : REAL;
+END_VAR
+
+FUZZIFY RAMCapacity 
+	TERM Bad := (0, 1) (2, 1) (6, 0);
+	TERM Average := (2, 0) (6, 1) (12, 0);
+	TERM Good := (8, 0) (12, 1) (32, 0);
+	TERM VeryGood := (24, 0) (32, 1) (128, 1);
+END_FUZZIFY
+FUZZIFY RAMClockSpeed 
+	TERM Bad := (0, 1) (400, 1) (1000, 0);
+	TERM Average := (800, 0) (1000, 1) (1600, 0);
+	TERM Good := (1333, 0) (1600, 1) (2400, 0);
+	TERM VeryGood := (1600, 0) (2400, 1) (4400, 1);
+END_FUZZIFY
+FUZZIFY CPUCores 
+	TERM Bad := (0, 1) (2, 1) (4, 0);
+	TERM Average := (3, 0) (4, 1) (8, 0);
+	TERM Good := (6, 0) (8, 1) (10, 0);
+	TERM VeryGood := (8,0) (10,1) (96,1);
+END_FUZZIFY
+FUZZIFY GPUClockSpeed
+	TERM Bad := (0, 1) (500, 1) (1000, 0);
+	TERM Average := (800, 0) (1000, 1) (2000, 0);
+	TERM Good := (1800,0) (2000,1) (2300,1);
+END_FUZZIFY
+FUZZIFY GPUVRAM 
+	TERM Bad := (0, 1) (2, 1) (4, 0);
+	TERM Average := (3, 0) (4, 1) (8, 0);
+	TERM Good := (6, 0) (12, 1) (24, 1);
+END_FUZZIFY
+FUZZIFY StorageCapacity
+	TERM Bad := (0, 1) (128, 1) (256, 0);
+	TERM Average := (200, 0) (256, 1) (1000, 0);
+	TERM Good := (516, 0) (1000, 1) (4000, 1);
+END_FUZZIFY
+FUZZIFY CoolerTDP
+	TERM Bad := (0, 1) (30, 1) (50, 0);
+	TERM Average := (40, 0) (50, 1) (100, 0);
+	TERM Good := (80, 0) (100, 1) (200, 1);
+END_FUZZIFY
+
+DEFUZZIFY Mining
+	TERM Bad := (0,0) (20,1) (33, 0);
+	TERM Average := (25,0) (45,1) (66, 0);
+	TERM Good := (58,0) (78,1) (100, 0);
+	METHOD : COG;		
+	DEFAULT := 0;		
+END_DEFUZZIFY
+
+DEFUZZIFY Work 
+	TERM Bad  := (0,0) (20,1) (33, 0);
+	TERM Average  := (25,0) (45,1) (66, 0);
+	TERM Good  := (58,0) (78,1) (100, 0);
+	METHOD : COG;		
+	DEFAULT := 0;		
+END_DEFUZZIFY
+
+DEFUZZIFY Home 
+	TERM Bad  := (0,0) (20,1) (33, 0);
+	TERM Average  := (25,0) (45,1) (66, 0);
+	TERM Good  := (58,0) (78,1) (100, 0);
+	METHOD : COG;		
+	DEFAULT := 0;		
+END_DEFUZZIFY
+
+DEFUZZIFY Gaming 
+	TERM Bad  := (0,0) (20,1) (33, 0);
+	TERM Average  := (25,0) (45,1) (66, 0);
+	TERM Good  := (58,0) (78,1) (100, 0);
+	METHOD : COG;		
+	DEFAULT := 0;		
+END_DEFUZZIFY
+
+DEFUZZIFY Hosting 
+	TERM Bad := (0,0) (20,1) (33, 0);
+	TERM Average := (25,0) (45,1) (66, 0);
+	TERM Good := (58,0) (78,1) (100, 0);
+	METHOD : COG;		
+	DEFAULT := 0;		
+END_DEFUZZIFY
+
+RULEBLOCK GamingRules
+
+	AND : MIN;			
+	ACT : MIN;		
+	ACCU : MAX;	
+
+	RULE 1: IF GPUVRAM IS Good AND GPUClockSpeed is VeryGood AND RAMCapacity is VeryGood AND RAMClockSpeed is VeryGood
+	AND CPUCores is VeryGood AND StorageCapacity is Good AND CoolerTDP is Good THEN Gaming IS Good;
+
+	RULE 2: IF GPUVRAM IS Good AND GPUClockSpeed is Good AND RAMCapacity is Good AND RAMClockSpeed is Good AND CPUCores is Good AND StorageCapacity is Good AND CoolerTDP is Good THEN Gaming IS Good;
+	
+	RULE 3: IF GPUVRAM IS Good AND GPUClockSpeed is Good AND RAMCapacity is Good AND RAMClockSpeed is Good ANDAND CPUCores is Good AND StorageCapacity is Bad AND CoolerTDP is Good THEN Gaming IS Good;
+	
+	RULE 4: IF GPUVRAM IS Average AND GPUClockSpeed is Average AND RAMCapacity is Good AND RAMClockSpeed is Good AND CPUCores is Good AND StorageCapacity is Bad AND CoolerTDP is Good THEN Gaming IS Good;
+	
+	RULE 5: IF GPUVRAM IS Good AND GPUClockSpeed is Good AND RAMCapacity is Good AND RAMClockSpeed is Average AND CPUCores is Good AND StorageCapacity is Good AND CoolerTDP is Good THEN Gaming IS Good;
+	
+	RULE 6: IF GPUVRAM IS Average AND GPUClockSpeed is Average AND RAMCapacity is Good AND RAMClockSpeed is Good AND CPUCores is Good AND StorageCapacity is Good AND CoolerTDP is Average THEN Gaming IS Average;
+	
+	RULE 7: IF GPUVRAM IS Good AND GPUClockSpeed is Good AND RAMCapacity is Bad AND RAMClockSpeed is Good AND CPUCores is Good AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Average;
+	
+	RULE 8: IF GPUVRAM IS Average AND GPUClockSpeed is Average AND RAMCapacity is Good AND RAMClockSpeed is Good AND CPUCores is Bad AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Average;
+	
+	RULE 9: IF GPUVRAM IS Average AND GPUClockSpeed is Average AND RAMCapacity is Good AND RAMClockSpeed is Bad AND CPUCores is Average AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Average;
+	
+	RULE 10: IF GPUVRAM IS Bad AND GPUClockSpeed is Bad AND RAMCapacity is Good AND RAMClockSpeed is Good AND CPUCores is Good AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Bad;
+	
+	RULE 11: IF GPUVRAM IS Average AND GPUClockSpeed is Average AND RAMCapacity is Average AND RAMClockSpeed is Average AND CPUCores is Bad AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Bad;
+	
+	RULE 12: IF GPUVRAM IS Bad AND GPUClockSpeed is Average AND RAMCapacity is Bad AND RAMClockSpeed is Average AND CPUCores is Good AND StorageCapacity is Bad AND CoolerTDP is Average THEN Gaming IS Bad;
+	
+	RULE 13: IF GPUVRAM IS Average AND GPUClockSpeed is Bad AND RAMCapacity is Average AND RAMClockSpeed is Bad AND CPUCores is Average AND StorageCapacity is Bad AND CoolerTDP is Bad THEN Gaming IS Bad;
+
+END_RULEBLOCK
