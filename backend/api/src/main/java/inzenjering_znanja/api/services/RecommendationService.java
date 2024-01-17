@@ -9,15 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import inzenjering_znanja.api.DTO.RecommendDTO;
+import inzenjering_znanja.api.DTO.RecommendResponseDTO;
 import inzenjering_znanja.api.Helpers.EuclideanDistanceCalculator;
 
 @Service
 public class RecommendationService {
     @Autowired
+    ExecuteFuzzyLogicService efService;
+    @Autowired
     ExecuteQueryService eqService;
     private String ontUri = "http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#";
 
-    public String recommendComponents(RecommendDTO constraints) {
+    public RecommendResponseDTO recommendComponents(RecommendDTO constraints) {
 
         // Start buliding query
         String queryString = "PREFIX ont:<" + ontUri + ">\n" +
@@ -35,7 +38,8 @@ public class RecommendationService {
         queryString = appendConstraintsToQueryString(queryString, constraints);
         System.out.println(queryString);
         // Execute query
-        String result = eqService.executeRecommendQuery(queryString, constraints);
+        RecommendResponseDTO result = eqService.executeRecommendQuery(queryString, constraints);
+        result.usageScores = efService.executeFuzzyLogic(result.usageScores);
         return result;
     }
 
@@ -145,7 +149,7 @@ public class RecommendationService {
             queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
                     "FILTER(?ramCapacity >=" + constraints.minRamCapacityMb + ") . \n";
         }
-        if (constraints.maxNumOfRamSlotsMb != 0) {
+        if (constraints.maxRamCapacityMb != 0) {
             queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
                     "FILTER(?ramCapacity <=" + constraints.maxRamCapacityMb + ") . \n";
         }

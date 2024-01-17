@@ -4324,6 +4324,21 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Asus_Prime_A320M-K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Asus_Prime_A320M-K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#MicroATXMotherboard"/>
+        <computer-ontology-classes:hasNumberOfRAMSlots rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</computer-ontology-classes:hasNumberOfRAMSlots>
+        <computer-ontology-classes:hasPCI-E>2.0x1</computer-ontology-classes:hasPCI-E>
+        <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
+        <computer-ontology-classes:hasRAMCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasRAMCapacity>
+        <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
+        <computer-ontology-classes:hasSocket>AM4</computer-ontology-classes:hasSocket>
+        <computer-ontology-classes:isCompatibleWithMotherboardType>MicroATXMotherboard</computer-ontology-classes:isCompatibleWithMotherboardType>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Asus_ROG_Crosshair_II_Formula -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Asus_ROG_Crosshair_II_Formula">
@@ -5001,6 +5016,19 @@
     
 
 
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x16GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x16GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasBuffer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</computer-ontology-classes:hasBuffer>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2133</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfRAMSlots rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</computer-ontology-classes:hasNumberOfRAMSlots>
+        <computer-ontology-classes:hasRAMSpeedType>DDR4</computer-ontology-classes:hasRAMSpeedType>
+        <computer-ontology-classes:hasSizeOfRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#int">32</computer-ontology-classes:hasSizeOfRAM>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x8GB -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#HyperX_Fury_DDR4_2133_C14_2x8GB">
@@ -5624,6 +5652,19 @@
         <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
         <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">75</computer-ontology-classes:hasPower>
         <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4000</computer-ontology-classes:hasVRAM>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_1660_Ti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#NVIDIA_GeForce_GTX_1660_Ti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#Component"/>
+        <computer-ontology-classes:hasClockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1500</computer-ontology-classes:hasClockSpeed>
+        <computer-ontology-classes:hasNumberOfCores rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1536</computer-ontology-classes:hasNumberOfCores>
+        <computer-ontology-classes:hasPCI-E>3.0x16</computer-ontology-classes:hasPCI-E>
+        <computer-ontology-classes:hasPower rdf:datatype="http://www.w3.org/2001/XMLSchema#int">120</computer-ontology-classes:hasPower>
+        <computer-ontology-classes:hasVRAM rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6000</computer-ontology-classes:hasVRAM>
     </owl:NamedIndividual>
     
 

@@ -11,18 +11,22 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.riot.RDFDataMgr;
 import org.springframework.stereotype.Service;
 
 import inzenjering_znanja.api.DTO.RecommendDTO;
+import inzenjering_znanja.api.DTO.RecommendResponseDTO;
 
 @Service
 public class ExecuteQueryService {
     public String queryTest = "PREFIX ont:<http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#> SELECT ?cpu WHERE { ?cpu a ont:CPU}";
     public String rdfFilePath = "X:/GitRepos/InzenjeringZnanja2023/computer-ontology-classes.rdf";
-    public String altPath = "C:/Users/Dejan/Desktop/computer-ontology-classes.rdf";
+    public String altPath = "C:/Users/Dejan/Desktop/InzenjeringZnanja2023/computer-ontology-classes.rdf";
     public String queryPrefix = "PREFIX ont: <http://www.semanticweb.org/inzenjering-znanja-2023/computer-ontology-classes#>\n"
             +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -47,7 +51,7 @@ public class ExecuteQueryService {
         infModel = ModelFactory.createInfModel(reasoner, model);
     }
 
-    public String executeRecommendQuery(String queryString, RecommendDTO constraints) {
+    public RecommendResponseDTO executeRecommendQuery(String queryString, RecommendDTO constraints) {
         Query query = QueryFactory.create(queryString);
         List<List<String>> allConfigs = new ArrayList<>();
         String result = "";
@@ -75,9 +79,10 @@ public class ExecuteQueryService {
             e.printStackTrace();
             return null;
         }
+        RecommendResponseDTO response = new RecommendResponseDTO();
         for (List<String> config : allConfigs) {
             String queryCasePSUString = queryPrefix +
-                    "SELECT ?psu ?case ?cooling\n" +
+                    "SELECT ?psu ?case ?cooling ?coolingPower ?psuPower ?ramCapacity ?gpuCores ?cpuCores ?gpuVRAM\n" +
                     "WHERE { \n" +
                     "    ?psu      a  ont:PowerSupply .\n" + //
                     "    ?case     a  ont:Case .\n" + //
@@ -86,7 +91,12 @@ public class ExecuteQueryService {
                     "    BIND(ont:" + config.get(1) + " AS ?gpu) .\n" + //
                     "    BIND(ont:" + config.get(3) + " AS ?motherboard).\n" + //
                     "    BIND(ont:" + config.get(2) + " AS ?ram).\n" + //
-                    "    BIND(ont:" + config.get(4) + " AS ?storage) .\n";
+                    "    BIND(ont:" + config.get(4) + " AS ?storage) .\n" + //
+                    "    ?ram ont:hasSizeOfRAM ?ramCapacity .\n"+
+                    "    ?gpu ont:hasNumberOfCores ?gpuCores .\n"+
+                    "    ?cpu ont:hasNumberOfCores ?cpuCores .\n"+
+                    "    ?gpu ont:hasVRAM ?gpuVRAM .\n";
+
             // COOLING constraints
             if (constraints.minimalThermalPerformance != 0) {
                 queryCasePSUString += "?cooling ont:hasPower ?coolerTDP . \n" +
@@ -101,6 +111,15 @@ public class ExecuteQueryService {
                 }
                 queryCasePSUString += "). \n";
 
+            }
+            // PSU constraints
+            if(constraints.minPSUPower != 0){
+                queryCasePSUString += "?psu ont:hasPower ?psuPower . \n" +
+                        "FILTER(?psuPower >=" + constraints.minPSUPower + ") . \n";
+            }
+            if(constraints.maxPSUPower != 0){
+                queryCasePSUString += "?psu ont:hasPower ?psuPower . \n" +
+                        "FILTER(?psuPower <=" + constraints.maxPSUPower + ") . \n";
             }
             queryCasePSUString += "?cpu ont:hasPower ?cpuPower .\n" + //
                     "    ?gpu ont:hasPower ?gpuPower .\n" + //
@@ -118,8 +137,9 @@ public class ExecuteQueryService {
                     "    ?motherboard ont:isCompatibleWithMotherboardType ?mbT2.\n" + //
                     "    FILTER(?mbT1 = ?mbT2).\n" +
                     "}";
-            //System.out.println(queryCasePSUString);
+            System.out.println(queryCasePSUString);
             Query queryCasePSU = QueryFactory.create(queryCasePSUString);
+           
             try (QueryExecution qe = QueryExecutionFactory.create(queryCasePSU, infModel)) {
                 ResultSet results = qe.execSelect();
 
@@ -128,9 +148,18 @@ public class ExecuteQueryService {
                     String psu = solution.getResource("psu").getLocalName();
                     String pcCase = solution.getResource("case").getLocalName();
                     String cooling = solution.getResource("cooling").getLocalName();
-                    result = config.get(0) + " || " + config.get(1) + " || " + config.get(2) + " || "
+                    response.recommendedComponents = config.get(0) + " || " + config.get(1) + " || " + config.get(2) + " || "
                             + config.get(3) + " || " + config.get(4) + " || " + psu + " || " + pcCase + " || "
                             + cooling;
+                     
+                    response.usageScores[5] = solution.getLiteral("coolingPower").getDouble() ;
+                    response.usageScores[4] = solution.getLiteral("psuPower").getDouble() ;
+                    response.usageScores[1] = solution.getLiteral("gpuCores").getDouble() ;
+                    response.usageScores[2] = solution.getLiteral("gpuVRAM").getDouble() ;
+                    response.usageScores[0] = solution.getLiteral("cpuCores").getDouble() ;
+                    response.usageScores[3] = solution.getLiteral("ramCapacity").getDouble() ;
+                    
+        
                     break;
                 }
             } catch (Exception e) {
@@ -140,7 +169,7 @@ public class ExecuteQueryService {
             }
         }
 
-        return result;
+        return response;
     }
 
     public List<List<Double>> executeGetAllConfigsQuery() {

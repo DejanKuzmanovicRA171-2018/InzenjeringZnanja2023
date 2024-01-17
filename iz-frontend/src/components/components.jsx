@@ -17,6 +17,7 @@ const Components = () => {
   const [powerSupplyData, setPowerSupplyData] = useState({});
   const [motherboardData, setMotherboardData] = useState({});
   const [recComponents, setRecComponents] = useState(null);
+  const [gamingScore, setGamingScore] = useState(null);
   const [loading, setLoading] = useState(false);
   const labels = [
     "Processor: ",
@@ -30,6 +31,7 @@ const Components = () => {
   ];
   const postData = async () => {
     setLoading(true);
+    setGamingScore(null);
     const url = "http://localhost:8080/recommend";
 
     const requestBody = {
@@ -77,7 +79,9 @@ const Components = () => {
       if (response.data === "") {
         alert("No pc configuration matches provided requirements");
       }
-      setRecComponents(response.data);
+      setGamingScore(response.data.usageScores[0]);
+
+      setRecComponents(response.data.recommendedComponents);
     } catch (error) {
       console.error("Error making POST request:", error);
     } finally {
@@ -160,6 +164,7 @@ const Components = () => {
           ))}
         </div>
       )}
+      {gamingScore && <p>Gaming score: {gamingScore.toFixed(2)}%</p>}
     </>
   );
 };
