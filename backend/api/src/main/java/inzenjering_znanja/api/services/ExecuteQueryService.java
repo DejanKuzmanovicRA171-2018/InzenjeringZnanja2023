@@ -40,7 +40,7 @@ public class ExecuteQueryService {
         model = ModelFactory.createDefaultModel();
         // Read RDF data from the file into the model
         try {
-            RDFDataMgr.read(model, altPath);
+            RDFDataMgr.read(model, rdfFilePath);
         } catch (Exception e) {
             // Log or handle the exception
             e.printStackTrace();
@@ -92,9 +92,9 @@ public class ExecuteQueryService {
                     "    BIND(ont:" + config.get(3) + " AS ?motherboard).\n" + //
                     "    BIND(ont:" + config.get(2) + " AS ?ram).\n" + //
                     "    BIND(ont:" + config.get(4) + " AS ?storage) .\n" + //
-                    "    ?ram ont:hasSizeOfRAM ?ramCapacity .\n"+
-                    "    ?gpu ont:hasNumberOfCores ?gpuCores .\n"+
-                    "    ?cpu ont:hasNumberOfCores ?cpuCores .\n"+
+                    "    ?ram ont:hasSizeOfRAM ?ramCapacity .\n" +
+                    "    ?gpu ont:hasNumberOfCores ?gpuCores .\n" +
+                    "    ?cpu ont:hasNumberOfCores ?cpuCores .\n" +
                     "    ?gpu ont:hasVRAM ?gpuVRAM .\n";
 
             // COOLING constraints
@@ -113,11 +113,11 @@ public class ExecuteQueryService {
 
             }
             // PSU constraints
-            if(constraints.minPSUPower != 0){
+            if (constraints.minPSUPower != 0) {
                 queryCasePSUString += "?psu ont:hasPower ?psuPower . \n" +
                         "FILTER(?psuPower >=" + constraints.minPSUPower + ") . \n";
             }
-            if(constraints.maxPSUPower != 0){
+            if (constraints.maxPSUPower != 0) {
                 queryCasePSUString += "?psu ont:hasPower ?psuPower . \n" +
                         "FILTER(?psuPower <=" + constraints.maxPSUPower + ") . \n";
             }
@@ -139,7 +139,7 @@ public class ExecuteQueryService {
                     "}";
             System.out.println(queryCasePSUString);
             Query queryCasePSU = QueryFactory.create(queryCasePSUString);
-           
+
             try (QueryExecution qe = QueryExecutionFactory.create(queryCasePSU, infModel)) {
                 ResultSet results = qe.execSelect();
 
@@ -148,18 +148,18 @@ public class ExecuteQueryService {
                     String psu = solution.getResource("psu").getLocalName();
                     String pcCase = solution.getResource("case").getLocalName();
                     String cooling = solution.getResource("cooling").getLocalName();
-                    response.recommendedComponents = config.get(0) + " || " + config.get(1) + " || " + config.get(2) + " || "
+                    response.recommendedComponents = config.get(0) + " || " + config.get(1) + " || " + config.get(2)
+                            + " || "
                             + config.get(3) + " || " + config.get(4) + " || " + psu + " || " + pcCase + " || "
                             + cooling;
-                     
-                    response.usageScores[5] = solution.getLiteral("coolingPower").getDouble() ;
-                    response.usageScores[4] = solution.getLiteral("psuPower").getDouble() ;
-                    response.usageScores[1] = solution.getLiteral("gpuCores").getDouble() ;
-                    response.usageScores[2] = solution.getLiteral("gpuVRAM").getDouble() ;
-                    response.usageScores[0] = solution.getLiteral("cpuCores").getDouble() ;
-                    response.usageScores[3] = solution.getLiteral("ramCapacity").getDouble() ;
-                    
-        
+
+                    response.usageScores[5] = solution.getLiteral("coolingPower").getDouble();
+                    response.usageScores[4] = solution.getLiteral("psuPower").getDouble();
+                    response.usageScores[1] = solution.getLiteral("gpuCores").getDouble();
+                    response.usageScores[2] = solution.getLiteral("gpuVRAM").getDouble();
+                    response.usageScores[0] = solution.getLiteral("cpuCores").getDouble();
+                    response.usageScores[3] = solution.getLiteral("ramCapacity").getDouble();
+
                     break;
                 }
             } catch (Exception e) {

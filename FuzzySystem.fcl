@@ -31,22 +31,27 @@ FUZZIFY CPUCores
 	TERM Good := (6, 0) (8, 1) (9,1) (10, 0);
 	TERM VeryGood := (9,0) (10,1) (96,1);
 END_FUZZIFY
+
 FUZZIFY GPUCores 
 	TERM Bad := (0, 1) (100, 1) (300,1) (500, 0);
 	TERM Average := (300, 0) (500, 1) (1000,1) (1500, 0);
 	TERM Good := (1000, 0) (1500, 1) (2500,1) (3500, 0);
 	TERM VeryGood := (2500,0) (3500,1) (8000,1);
 END_FUZZIFY
+
 FUZZIFY GPUVRAM 
-	TERM Bad := (0, 1) (2000, 1) (3000,1) (4000, 0);
+	TERM VeryBad := (0, 1) (500, 1) (1000, 0)
+	TERM Bad := (500, 0) (1000, 1) (3000,1) (4000, 0);
 	TERM Average := (3000, 0) (4000, 1)(6000,1) (8000, 0);
 	TERM Good := (6000, 0) (12000, 1) (16000,1) (24000, 1);
 END_FUZZIFY
+
 FUZZIFY PowerSupply
 	TERM Bad := (0, 1) (150, 1)(350,1) (450, 0);
 	TERM Average := (350, 0) (450, 1) (550,1) (750, 0);
 	TERM Good := (550, 0) (750, 1)(850,1) (1000, 1);
 END_FUZZIFY
+
 FUZZIFY CoolerTDP
 	TERM Bad := (0, 1) (30, 1) (40,1)(50, 0);
 	TERM Average := (40, 0) (50, 1) (80,1) (100, 0);
@@ -62,25 +67,26 @@ DEFUZZIFY Mining
 END_DEFUZZIFY
 
 DEFUZZIFY Work 
-	TERM Bad  := (0,0) (20,1) (33, 0);
-	TERM Average  := (25,0) (45,1) (66, 0);
-	TERM Good  := (58,0) (78,1) (100, 0);
+	TERM Bad := (0, 1) (2, 1) (4, 0);
+	TERM Average := (3, 0) (5, 1) (6, 0);
+	TERM Good := (5, 0) (8, 1) (10, 1);
 	METHOD : COG;		
 	DEFAULT := 0;		
 END_DEFUZZIFY
 
 DEFUZZIFY Home 
-	TERM Bad  := (0,0) (20,1) (33, 0);
-	TERM Average  := (25,0) (45,1) (66, 0);
-	TERM Good  := (58,0) (78,1) (100, 0);
+	TERM Bad := (0,0) (20,1) (33, 0);
+	TERM Average := (25,0) (45,1) (66, 0);
+	TERM Good := (58,0) (78,1) (100, 0);
 	METHOD : COG;		
 	DEFAULT := 0;		
 END_DEFUZZIFY
 
 DEFUZZIFY Gaming 
-	TERM Bad := (0, 1) (2, 1) (4, 0);
-	TERM Average := (3, 0) (5, 1) (7, 0);
-	TERM Good := (6, 0) (8, 1) (10, 1);
+	TERM VeryBad := (0, 1) (5, 1) (10, 0)
+	TERM Bad := (5,0) (10,1) (33, 0);
+	TERM Average := (25,0) (33,1) (45,1) (66, 0);
+	TERM Good := (60,0) (66,1) (99,1) (100, 0);
 	METHOD : COG;		
 	DEFAULT := 0;		
 END_DEFUZZIFY
@@ -101,10 +107,8 @@ RULEBLOCK GamingRules
 
 	RULE 3: IF RAMCapacity is Average THEN Gaming is Good;
 	
-	
 	RULE 5: IF CPUCores is Good THEN Gaming is Good;
 	RULE 6: IF CPUCores is VeryGood THEN Gaming is Good;
-	RULE 7: IF CPUCores is Average THEN Gaming is Average;
 	RULE 8: IF CPUCores is Bad THEN Gaming is Bad;
 	
 	RULE 9: IF GPUCores is Good THEN Gaming is Good;
@@ -138,10 +142,91 @@ RULEBLOCK GamingRules
 	RULE 32: IF PowerSupply is Average AND GPUCores is VeryGood THEN Gaming is Good;
 	RULE 33: IF PowerSupply is Average AND GPUCores is Good THEN Gaming is Good;
 	RULE 34: IF PowerSupply is Average AND GPUVRAM is Good THEN Gaming is Good;
+
+	RULE 35: IF GPUVRAM is VeryBad THEN Gaming is VeryBad;
+	RULE 36: IF GPUVRAM is VeryBad AND CPUCores is VeryGood THEN Gaming is VeryBad;
+	RULE 37: IF GPUVRAM is VeryBad AND CPUCores is Good THEN Gaming is VeryBad;
+	RULE 38: IF GPUVRAM is VeryBad AND CPUCores is Average THEN Gaming is VeryBad;
+	RULE 39: IF GPUVRAM is VeryBad AND RAMCapacity is VeryGood THEN Gaming is VeryBad;
+	RULE 40: IF GPUVRAM is VeryBad AND RAMCapacity is Good THEN Gaming is VeryBad;
+	RULE 41: IF GPUVRAM is VeryBad AND RAMCapacity is Average THEN Gaming is VeryBad;
 	
+END_RULEBLOCK
 
+RULEBLOCK HostingRules
 
+	AND : MIN;			
+	ACT : MIN;		
+	ACCU : MAX;	
+
+	RULE 1: IF CPUCores is VeryGood THEN Hosting is Good;
+	RULE 2: IF CPUCores is Good THEN Hosting is Average;
+	RULE 3: IF CPUCores is Average THEN Hosting is Bad;
+	RULE 4: IF CPUCores is Bad Then Hosting is Bad;
+
+	RULE 5: IF CPUCores is VeryGood and RAMCapacity is Average THEN Hosting is Good;
+	RULE 6: IF CPUCores is Good and RAMCapacity is Average THEN Hosting is Good;
+	RULE 7: IF CPUCores is VeryGood and RAMCapacity is Bad THEN Hosting is Average;
+	RULE 8: IF CPUCores is Good and RAMCapacity is Bad THEN Hosting is Bad;
+	RULE 9: IF CPUCores is Average and RAMCapacity is Good THEN Hosting is Average;
+	RULE 10: IF CPUCores is Average and RAMCapacity is Average THEN Hosting is Bad;
+	RULE 11: IF CPUCores is Average and RAMCapacity is Bad THEN Hosting is Bad;
 
 END_RULEBLOCK
+
+RULEBLOCK WorkRules
+
+	AND : MIN;			
+	ACT : MIN;		
+	ACCU : MAX;	
+
+	RULE 1: IF CPUCores is Good THEN Work is Good;
+	RULE 2: IF CPUCores is VeryGood THEN Work is Good;
+	RULE 3: IF CPUCores is Average THEN Work is Good;
+	RULE 4: IF CPUCores is Bad AND RAMCapacity is Bad THEN Work is Bad;
+	RULE 5: IF CPUCores is Bad AND RAMCapacity is Average THEN Work is Average;
+	RULE 6: IF CPUCores is Bad AND RAMCapacity is Good THEN Work is Good;
+	RULE 7: IF CPUCores is Good AND RAMCapacity is Average THEN Work is Good;
+	RULE 8: IF CPUCores is Good AND RAMCapacity is Bad THEN Work is Average;
+	RULE 9: IF CPUCores is Average AND RAMCapacity is Good THEN Work is Good;
+	RULE 10: IF CPUCores is Good AND RAMCapacity is Good THEN Work is Good;
+	RULE 11: IF CPUCores is VeryGood AND RAMCapacity is Bad THEN Work is Good;
+
+	RULE 12: IF CPUCores is Bad AND GPUCores is VeryGood THEN Work is Average;
+	RULE 13: IF CPUCores is Bad AND GPUCores is Good THEN Work is Average;
+	RULE 14: IF CPUCores is Bad AND GPUCores is Average THEN Work is Bad;
+	RULE 15: IF CPUCores is Average AND GPUCores is Bad THEN Work is Bad;
+	RULE 16: IF CPUCores is Average AND GPUCores is Average THEN Work is Good;
+	RULE 17: IF CPUCores is Good AND GPUCores is Bad THEN Work is Average;
+	RULE 18: IF CPUCores is VeryGood AND GPUCores is Bad THEN Work is Good;
+
+END_RULEBLOCK
+
+RULEBLOCK MiningRules
+
+	AND : MIN;			
+	ACT : MIN;		
+	ACCU : MAX;	
+
+	RULE 1: IF GPUCores is Good THEN Mining is Good;
+	RULE 2: IF GPUCores is VeryGood THEN Mining is Good;
+	RULE 3: IF GPUVRAM is Good THEN Mining is Good;
+	RULE 4: IF GPUCores is Average AND GPUVRAM is Good THEN Mining is Average;
+	RULE 5: IF GPUCores is Bad THEN Mining is Bad;
+	RULE 6: IF GPUVRAM is Bad THEN Mining is Bad;
+	RULE 7: IF GPUCores is Good AND GPUVRAM is Average THEN Mining is Good;
+	RULE 8: IF GPUCores is VeryGood AND GPUVRAM is Average THEN Mining is Good;
+	RULE 9: IF GPUCores is Average AND GPUVRAM is Average THEN Mining is Average;
+	RULE 10: IF GPUCores is Bad AND GPUVRAM is Bad THEN Mining is Bad;
+	
+	RULE 11: IF CoolerTDP is Average AND GPUCores is Good THEN Mining is Good;
+	RULE 12: IF CoolerTDP is Average AND GPUVRAM is Good THEN Mining is Good;
+	RULE 13: IF CoolerTDP is Average AND GPUCores is Average THEN Mining is Average;
+	RULE 14: IF CoolerTDP is Average AND GPUVRAM is Average THEN Mining is Average;
+	RULE 15: IF CoolerTDP is Bad AND GPUCores is VeryGood THEN Mining is Average;
+	RULE 16: IF CoolerTDP is Bad AND GPUCores is Good THEN Mining is Bad;
+	
+END_RULEBLOCK
+
 END_FUNCTION_BLOCK
 	
