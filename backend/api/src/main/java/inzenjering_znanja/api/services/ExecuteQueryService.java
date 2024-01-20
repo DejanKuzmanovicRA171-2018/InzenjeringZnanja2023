@@ -11,9 +11,6 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.ReasonerRegistry;
 import org.apache.jena.riot.RDFDataMgr;
@@ -61,46 +58,21 @@ public class ExecuteQueryService {
     }
 
     public RecommendResponseDTO executeRecommendQuery(String queryString, RecommendDTO constraints) {
-        Query query = QueryFactory.create(queryString);
-        List<List<String>> allConfigs = new ArrayList<>();
-        String result = "";
-        // Execute the query on the inferred model
-        try (QueryExecution queryExecution = QueryExecutionFactory.create(query, infModel)) {
-            ResultSet results = queryExecution.execSelect();
+        List<PC> allConfigs = executeGetAllConfigsQuery();
 
-            while (results.hasNext()) {
-                QuerySolution solution = results.nextSolution();
-                String cpu = solution.getResource("cpu").getLocalName();
-                String gpu = solution.getResource("gpu").getLocalName();
-                String ram = solution.getResource("ram").getLocalName();
-                String motherboard = solution.getResource("motherboard").getLocalName();
-                String storage = solution.getResource("storage").getLocalName();
-                List<String> config = new ArrayList<String>();
-                config.add(cpu);
-                config.add(gpu);
-                config.add(ram);
-                config.add(motherboard);
-                config.add(storage);
-                allConfigs.add(config);
-            }
-        } catch (Exception e) {
-            // Log or handle the exception
-            e.printStackTrace();
-            return null;
-        }
         RecommendResponseDTO response = new RecommendResponseDTO();
-        for (List<String> config : allConfigs) {
+        for (PC config : allConfigs) {
             String queryCasePSUString = queryPrefix +
                     "SELECT ?psu ?case ?cooling ?coolingPower ?psuPower ?ramCapacity ?gpuCores ?cpuCores ?gpuVRAM\n" +
                     "WHERE { \n" +
                     "    ?psu      a  ont:PowerSupply .\n" + //
                     "    ?case     a  ont:Case .\n" + //
                     "    ?cooling  a  ont:Cooling .\n" + //
-                    "    BIND(ont:" + config.get(0) + " AS ?cpu) .\n" + //
-                    "    BIND(ont:" + config.get(1) + " AS ?gpu) .\n" + //
-                    "    BIND(ont:" + config.get(3) + " AS ?motherboard).\n" + //
-                    "    BIND(ont:" + config.get(2) + " AS ?ram).\n" + //
-                    "    BIND(ont:" + config.get(4) + " AS ?storage) .\n" + //
+                    "    BIND(ont:" + config.getCpu().getName() + " AS ?cpu) .\n" + //
+                    "    BIND(ont:" + config.getGpu().getName() + " AS ?gpu) .\n" + //
+                    "    BIND(ont:" + config.getMotherboard().getName() + " AS ?motherboard).\n" + //
+                    "    BIND(ont:" + config.getRam().getName() + " AS ?ram).\n" + //
+                    "    BIND(ont:" + config.getStorage().getName() + " AS ?storage) .\n" + //
                     "    ?ram ont:hasSizeOfRAM ?ramCapacity .\n" +
                     "    ?gpu ont:hasNumberOfCores ?gpuCores .\n" +
                     "    ?cpu ont:hasNumberOfCores ?cpuCores .\n" +
@@ -157,10 +129,19 @@ public class ExecuteQueryService {
                     String psu = solution.getResource("psu").getLocalName();
                     String pcCase = solution.getResource("case").getLocalName();
                     String cooling = solution.getResource("cooling").getLocalName();
-                    response.recommendedComponents = config.get(0) + " || " + config.get(1) + " || " + config.get(2)
-                            + " || "
-                            + config.get(3) + " || " + config.get(4) + " || " + psu + " || " + pcCase + " || "
-                            + cooling;
+
+                    int coolingPower = solution.getLiteral("coolingPower").getInt();
+                    int psuPower = solution.getLiteral("psuPower").getInt();
+
+                    PSU newPSU = new PSU(psu, psuPower);
+                    Cooling newCooling = new Cooling(cooling, coolingPower);
+                    Case newCase = new Case(pcCase);
+
+                    config.setCooling(newCooling);
+                    config.setPcCase(newCase);
+                    config.setPsu(newPSU);
+
+                    response.recommendedComponents = config;
 
                     response.usageScores[5] = solution.getLiteral("coolingPower").getDouble();
                     response.usageScores[4] = solution.getLiteral("psuPower").getDouble();
