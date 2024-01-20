@@ -40,16 +40,10 @@ const CPU = ({ onCPUChange }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "socket" && !socketOptions.includes(value)) {
-      return;
-    }
-
-    setCPUData({
-      ...cpuData,
+    setCPUData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
-
-    onCPUChange(cpuData);
+    }));
   };
 
   useEffect(() => {
