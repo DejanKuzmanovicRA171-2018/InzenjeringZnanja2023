@@ -34,7 +34,8 @@ public class ExecuteFuzzyLogicService {
     double[] usageScores = new double[5];
     // Get output values
     usageScores[0] = fis.getVariable("Gaming").getValue();
-    usageScores[1] = fis.getVariable("Hosting").getValue();
+    usageScores[1] = fis.getVariable("Hosting").getValue() * 10;
+    usageScores[2] = fis.getVariable("Home").getValue() * 10;
     usageScores[3] = fis.getVariable("Work").getValue() * 10;
     usageScores[4] = fis.getVariable("Mining").getValue();
 

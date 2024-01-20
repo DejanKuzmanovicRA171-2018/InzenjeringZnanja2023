@@ -40,7 +40,7 @@ FUZZIFY GPUCores
 END_FUZZIFY
 
 FUZZIFY GPUVRAM 
-	TERM VeryBad := (0, 1) (500, 1) (1000, 0)
+	TERM VeryBad := (0, 1) (500, 1) (1000, 0) ;
 	TERM Bad := (500, 0) (1000, 1) (3000,1) (4000, 0);
 	TERM Average := (3000, 0) (4000, 1)(6000,1) (8000, 0);
 	TERM Good := (6000, 0) (12000, 1) (16000,1) (24000, 1);
@@ -75,15 +75,15 @@ DEFUZZIFY Work
 END_DEFUZZIFY
 
 DEFUZZIFY Home 
-	TERM Bad := (0,0) (20,1) (33, 0);
-	TERM Average := (25,0) (45,1) (66, 0);
-	TERM Good := (58,0) (78,1) (100, 0);
+	TERM Bad := (0, 1) (2, 1) (4, 0);
+	TERM Average := (3, 0) (5, 1) (7, 0);
+	TERM Good := (6, 0) (8, 1) (10, 1);
 	METHOD : COG;		
 	DEFAULT := 0;		
 END_DEFUZZIFY
 
 DEFUZZIFY Gaming 
-	TERM VeryBad := (0, 1) (5, 1) (10, 0)
+	TERM VeryBad := (0, 1) (5, 1) (10, 0);
 	TERM Bad := (5,0) (10,1) (33, 0);
 	TERM Average := (25,0) (33,1) (45,1) (66, 0);
 	TERM Good := (60,0) (66,1) (99,1) (100, 0);
@@ -92,9 +92,9 @@ DEFUZZIFY Gaming
 END_DEFUZZIFY
 
 DEFUZZIFY Hosting 
-	TERM Bad := (0,0) (20,1) (33, 0);
-	TERM Average := (25,0) (45,1) (66, 0);
-	TERM Good := (58,0) (78,1) (100, 0);
+	TERM Bad := (0, 1) (2, 1) (4, 0);
+	TERM Average := (3, 0) (5, 1) (6, 0);
+	TERM Good := (5, 0) (8, 1) (10, 1);
 	METHOD : COG;		
 	DEFAULT := 0;		
 END_DEFUZZIFY
@@ -152,7 +152,24 @@ RULEBLOCK GamingRules
 	RULE 41: IF GPUVRAM is VeryBad AND RAMCapacity is Average THEN Gaming is VeryBad;
 	
 END_RULEBLOCK
+RULEBLOCK HomeRules
 
+	AND : MIN;			
+	ACT : MIN;		
+	ACCU : MAX;	
+
+	RULE 1: IF CPUCores is Bad OR RAMCapacity is Bad  THEN Home is Good;
+	RULE 2: IF CPUCores is Average THEN Home is Good;
+	RULE 3: IF CPUCores is Good THEN Home is Good;
+
+	RULE 4: IF GPUCores is Bad THEN Home is Good;
+	RULE 5: IF GPUVRAM is Bad THEN Home is Good;
+	RULE 6: IF GPUCores is Average THEN Home is Good;
+	RULE 7: IF GPUVRAM is Average THEN Home is Good;
+	RULE 8: IF GPUCores is Good THEN Home is Good;
+	RULE 9: IF GPUVRAM is Good THEN Home is Good;
+
+END_RULEBLOCK
 RULEBLOCK HostingRules
 
 	AND : MIN;			

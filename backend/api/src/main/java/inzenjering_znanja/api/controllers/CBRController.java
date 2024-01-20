@@ -30,7 +30,7 @@ public class CBRController {
 
     @GetMapping("/testCBR")
     public List<PC> getPCs() {
-        return eqService.executeGetAllConfigsQuery();
+        return eqService.executeGetAllConfigsQuery(null);
     }
 
     @PostMapping("/similar")

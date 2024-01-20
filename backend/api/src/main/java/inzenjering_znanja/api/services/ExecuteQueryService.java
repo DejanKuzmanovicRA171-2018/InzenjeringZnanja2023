@@ -27,6 +27,7 @@ import inzenjering_znanja.api.Models.PC;
 import inzenjering_znanja.api.Models.PSU;
 import inzenjering_znanja.api.Models.RAM;
 import inzenjering_znanja.api.Models.Storage;
+import inzenjering_znanja.api.services.RecommendationService;
 
 @Service
 public class ExecuteQueryService {
@@ -46,7 +47,7 @@ public class ExecuteQueryService {
         model = ModelFactory.createDefaultModel();
         // Read RDF data from the file into the model
         try {
-            RDFDataMgr.read(model, rdfFilePath);
+            RDFDataMgr.read(model, altPath);
         } catch (Exception e) {
             // Log or handle the exception
             e.printStackTrace();
@@ -58,7 +59,7 @@ public class ExecuteQueryService {
     }
 
     public RecommendResponseDTO executeRecommendQuery(String queryString, RecommendDTO constraints) {
-        List<PC> allConfigs = executeGetAllConfigsQuery();
+        List<PC> allConfigs = executeGetAllConfigsQuery(constraints);
 
         RecommendResponseDTO response = new RecommendResponseDTO();
         for (PC config : allConfigs) {
@@ -162,7 +163,7 @@ public class ExecuteQueryService {
         return response;
     }
 
-    public List<PC> executeGetAllConfigsQuery() {
+    public List<PC> executeGetAllConfigsQuery(RecommendDTO constraints) {
         String queryString = queryPrefix +
                 "SELECT ?cpu ?cpuClockSpeed ?cpuCores ?cpuThreads ?gpu ?gpuClockSpeed ?gpuCores ?gpuVRAM ?motherboard ?ramSlotsM ?ramCapacityM ?ram ?ramClock ?ramCapacityR ?storage ?storageSize ?writeSpeed ?rpm\n"
                 + //
@@ -190,8 +191,11 @@ public class ExecuteQueryService {
                 + //
                 "?storage a ont:Storage;\n" + //
                 "   ont:hasWriteSpeed ?writeSpeed; ont:hasRPM ?rpm; ont:hasCapacity ?storageSize.\n" + //
-                "?storage ont:hasRPM ?rpm.\n" + //
-                "FILTER(?ramSlotsR <= ?ramSlotsM && ?ramCapacityR <= ?ramCapacityM && ?ramSpeedC = ?ramSpeedR && ?ramSpeedR = ?ramSpeedM)\n"
+                "?storage ont:hasRPM ?rpm.\n"; //
+                if( constraints != null){
+                   queryString = RecommendationService.appendConstraintsToQueryString(queryString, constraints);
+                }
+                queryString += "FILTER(?ramSlotsR <= ?ramSlotsM && ?ramCapacityR <= ?ramCapacityM && ?ramSpeedC = ?ramSpeedR && ?ramSpeedR = ?ramSpeedM)\n"
                 + //
                 "}";
         System.out.println(queryString);

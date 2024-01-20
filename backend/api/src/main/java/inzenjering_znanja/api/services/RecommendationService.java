@@ -42,30 +42,30 @@ public class RecommendationService {
         return result;
     }
 
-    private String appendConstraintsToQueryString(String queryString, RecommendDTO constraints) {
+    public static String appendConstraintsToQueryString(String queryString, RecommendDTO constraints) {
         // CPU CONSTRAINTS
         if (constraints.cpuClockMin != 0) {
-            queryString += "?cpu ont:hasClockSpeed ?cpuClock . \n" +
-                    "FILTER(?cpuClock >=" + constraints.cpuClockMin + ") .\n";
+            queryString += 
+                    "FILTER(?cpuClockSpeed >=" + constraints.cpuClockMin + ") .\n";
         }
         if (constraints.cpuClockMax != 0) {
-            queryString += "?cpu ont:hasClockSpeed ?cpuClock . \n" +
-                    "FILTER(?cpuClock <=" + constraints.cpuClockMax + ") .\n";
+            queryString += 
+                    "FILTER(?cpuClockSpeed <=" + constraints.cpuClockMax + ") .\n";
         }
         if (constraints.cpuCoresMin != 0) {
-            queryString += "?cpu ont:hasNumberOfCores ?cpuCores . \n" +
+            queryString +=
                     "FILTER(?cpuCores >=" + constraints.cpuCoresMin + ") .\n";
         }
         if (constraints.cpuCoresMax != 0) {
-            queryString += "?cpu ont:hasNumberOfCores ?cpuCores . \n" +
+            queryString +=
                     "FILTER(?cpuCores <=" + constraints.cpuCoresMax + ") .\n";
         }
         if (constraints.cpuThreadsMin != 0) {
-            queryString += "?cpu ont:hasNumberOfThreads ?cpuThreads . \n" +
+            queryString +=
                     "FILTER(?cpuThreads >=" + constraints.cpuThreadsMin + ") .\n";
         }
         if (constraints.cpuThreadsMax != 0) {
-            queryString += "?cpu ont:hasNumberOfThreads ?cpuThreads . \n" +
+            queryString +=
                     "FILTER(?cpuThreads <=" + constraints.cpuThreadsMax + ") .\n";
         }
         if (constraints.cpuSocket != "") {
@@ -74,19 +74,19 @@ public class RecommendationService {
         }
         // GPU CONSTRAINTS
         if (constraints.gpuClockMin != 0) {
-            queryString += "?gpu ont:hasClockSpeed ?gpuClock . \n" +
-                    "FILTER(?gpuClock >=" + constraints.gpuClockMin + ") .\n";
+            queryString += 
+                    "FILTER(?gpuClockSpeed >=" + constraints.gpuClockMin + ") .\n";
         }
         if (constraints.gpuClockMax != 0) {
-            queryString += "?gpu ont:hasClockSpeed ?gpuClock . \n" +
-                    "FILTER(?gpuClock <=" + constraints.gpuClockMax + ") .\n";
+            queryString += 
+                    "FILTER(?gpuClockSpeed <=" + constraints.gpuClockMax + ") .\n";
         }
         if (constraints.gpuVRAMMin != 0) {
-            queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
+            queryString +=
                     "FILTER(?gpuVRAM >=" + constraints.gpuVRAMMin + ") .\n";
         }
         if (constraints.gpuVRAMMax != 0) {
-            queryString += "?gpu ont:hasVRAM ?gpuVRAM . \n" +
+            queryString +=
                     "FILTER(?gpuVRAM <=" + constraints.gpuVRAMMax + ") .\n";
         }
         if (constraints.pciEGPU != "") {
@@ -95,20 +95,20 @@ public class RecommendationService {
         }
         // RAM CONSTRAINTS
         if (constraints.ramClockMin != 0) {
-            queryString += "?ram ont:hasClockSpeed ?ramClock . \n" +
+            queryString += 
                     "FILTER(?ramClock >=" + constraints.ramClockMin + ") .\n";
         }
         if (constraints.ramClockMax != 0) {
-            queryString += "?ram ont:hasClockSpeed ?ramClock . \n" +
+            queryString += 
                     "FILTER(?ramClock <=" + constraints.ramClockMax + ") .\n";
         }
         if (constraints.ramSizeMin != 0) {
-            queryString += "?ram ont:hasSizeOfRAM ?ramSize . \n" +
-                    "FILTER(?ramSize >=" + constraints.ramSizeMin + ") .\n";
+            queryString += 
+                    "FILTER(?ramCapacityR >=" + constraints.ramSizeMin + ") .\n";
         }
         if (constraints.ramSizeMax != 0) {
-            queryString += "?ram ont:hasSizeOfRAM ?ramSize . \n" +
-                    "FILTER(?ramSize <=" + constraints.ramSizeMax + ") .\n";
+            queryString += 
+                    "FILTER(?ramCapacityR <=" + constraints.ramSizeMax + ") .\n";
         }
         if (constraints.ramSpeedType != "") {
             queryString += "?ram ont:hasRAMSpeedType ?ramSpeedType . \n" +
@@ -116,41 +116,41 @@ public class RecommendationService {
         }
         // STORAGE CONSTRAINTS
         if (constraints.storageWriteSpeedMin != 0) {
-            queryString += "?storage ont:hasWriteSpeed ?storageWrite . \n" +
-                    "FILTER(?storageWrite >=" + constraints.storageWriteSpeedMin + ") .\n";
+            queryString += 
+                    "FILTER(?writeSpeed >=" + constraints.storageWriteSpeedMin + ") .\n";
         }
         if (constraints.storageWriteSpeedMax != 0) {
-            queryString += "?storage ont:hasWriteSpeed ?storageWrite . \n" +
-                    "FILTER(?storageWrite <=" + constraints.storageWriteSpeedMax + ") .\n";
+            queryString += 
+                    "FILTER(?writeSpeed <=" + constraints.storageWriteSpeedMax + ") .\n";
         }
         if (constraints.storageCapacityMin != 0) {
-            queryString += "?storage ont:hasCapacity ?storageSize . \n" +
+            queryString += 
                     "FILTER(?storageSize >=" + constraints.storageCapacityMin + ") .\n";
         }
         if (constraints.storageCapacityMax != 0) {
-            queryString += "?storage ont:hasCapacity ?storageSize . \n" +
+            queryString += 
                     "FILTER(?storageSize <=" + constraints.storageCapacityMax + ") .\n";
         }
         if (constraints.storageType == "HDD") {
-            queryString += "?storage ont:hasRPM ?storageRPM . \n" +
-                    "FILTER(?storageRPM =" + constraints.storageRPM + ") . \n";
+            queryString += 
+                    "FILTER(?rpm =" + constraints.storageRPM + ") . \n";
         }
         // MOTHERBOARD constraints
         if (constraints.minNumOfRamSlotsMb != 0) {
-            queryString += "?motherboard ont:hasNumberOfRAMSlots ?ramSlots . \n" +
-                    "FILTER(?ramSlots >=" + constraints.minNumOfRamSlotsMb + ") . \n";
+            queryString += 
+                    "FILTER(?ramSlotsM >=" + constraints.minNumOfRamSlotsMb + ") . \n";
         }
         if (constraints.maxNumOfRamSlotsMb != 0) {
-            queryString += "?motherboard ont:hasNumberOfRAMSlots ?ramSlots . \n" +
-                    "FILTER(?ramSlots <=" + constraints.maxNumOfRamSlotsMb + ") . \n";
+            queryString += 
+                    "FILTER(?ramSlotsM <=" + constraints.maxNumOfRamSlotsMb + ") . \n";
         }
         if (constraints.minRamCapacityMb != 0) {
-            queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
-                    "FILTER(?ramCapacity >=" + constraints.minRamCapacityMb + ") . \n";
+            queryString +=
+                    "FILTER(?ramCapacityM >=" + constraints.minRamCapacityMb + ") . \n";
         }
         if (constraints.maxRamCapacityMb != 0) {
-            queryString += "?motherboard ont:hasRAMCapacity ?ramCapacity . \n" +
-                    "FILTER(?ramCapacity <=" + constraints.maxRamCapacityMb + ") . \n";
+            queryString +=
+                    "FILTER(?ramCapacityM <=" + constraints.maxRamCapacityMb + ") . \n";
         }
         for (int i = 0; i < constraints.pciEMb.length; i++) {
             queryString += "?motherboard ont:hasPCI-E ?pciESlot . \n" +
@@ -160,7 +160,7 @@ public class RecommendationService {
             queryString += "?motherboard ont:hasSocket ?mbSocket . \n" +
                     "FILTER(?mbSocket ='" + constraints.mbSocket + "') . \n";
         }
-        return queryString += "}";
+        return queryString;
     }
 
 }

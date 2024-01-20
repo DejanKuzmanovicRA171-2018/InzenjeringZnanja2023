@@ -39,7 +39,7 @@ public class SparqlConnector implements Connector {
 
     @Override
     public Collection<CBRCase> retrieveAllCases() {
-        List<PC> configs = eqService.executeGetAllConfigsQuery();
+        List<PC> configs = eqService.executeGetAllConfigsQuery(null);
         List<CBRCase> ret = new ArrayList<CBRCase>();
         for (PC pc : configs) {
             CBRCase cbrCase = new CBRCase();
