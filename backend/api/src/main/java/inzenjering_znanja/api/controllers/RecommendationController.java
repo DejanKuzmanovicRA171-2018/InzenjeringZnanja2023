@@ -4,6 +4,12 @@ import org.springframework.web.bind.annotation.RestController;
 import inzenjering_znanja.api.DTO.RecommendDTO;
 import inzenjering_znanja.api.DTO.RecommendResponseDTO;
 import inzenjering_znanja.api.DTO.TargetConfigDTO;
+import inzenjering_znanja.api.Models.CPU;
+import inzenjering_znanja.api.Models.GPU;
+import inzenjering_znanja.api.Models.Motherboard;
+import inzenjering_znanja.api.Models.PC;
+import inzenjering_znanja.api.Models.RAM;
+import inzenjering_znanja.api.Models.Storage;
 import inzenjering_znanja.api.services.ExecuteFuzzyLogicService;
 import inzenjering_znanja.api.services.RecommendationService;
 
@@ -16,56 +22,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 public class RecommendationController {
     @Autowired
     RecommendationService recService;
     @Autowired
     ExecuteFuzzyLogicService fuzzyLogicService;
-/* 
-    @GetMapping("/evaluate")
-    public Double getEvaluation() {
-        return fuzzyLogicService.executeFuzzyLogic();
-    }*/
-    
+
     @PostMapping("/recommend")
     public RecommendResponseDTO recommendComponents(@RequestBody RecommendDTO req) {
         return recService.recommendComponents(req);
-    }
-
-    @PostMapping("/similar")
-    public List<Double> mostSimilarPC(@RequestBody TargetConfigDTO req) {
-        List<Double> targetConfig = targetConfigToList(req);
-        return recService.mostSimilarPC(targetConfig);
-    }
-
-    private List<Double> targetConfigToList(TargetConfigDTO req) {
-        List<Double> features = new ArrayList<>();
-
-        // CPU constraints
-        features.add((double) req.cpuClock);
-        features.add((double) req.cpuCores);
-        features.add((double) req.cpuThreads);
-        // GPU constraints
-        features.add((double) req.gpuClock);
-        features.add((double) req.gpuVRAM);
-        // RAM constraints
-        features.add((double) req.ramClock);
-        features.add((double) req.ramSize);
-        // STORAGE constraints
-        features.add((double) req.storageWriteSpeed);
-        features.add((double) req.storageCapacity);
-        features.add((double) req.storageRPM);
-        // COOLING constraints
-        features.add((double) req.thermalPerformance);
-        // PSU constraints
-        features.add((double) req.psuPower);
-        // MOTHERBOARD constraints
-        features.add((double) req.numOfRamSlotsMb);
-        features.add((double) req.CapacityMb);
-
-        return features;
     }
 
 }

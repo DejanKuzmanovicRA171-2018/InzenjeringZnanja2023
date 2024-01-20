@@ -7,6 +7,7 @@ public class TargetConfigDTO {
     public int cpuThreads;
     // GPU constraints
     public int gpuClock;
+    public int gpuCores;
     public int gpuVRAM;
     // RAM constraints
     public int ramClock;
@@ -15,10 +16,6 @@ public class TargetConfigDTO {
     public int storageWriteSpeed;
     public int storageCapacity;
     public int storageRPM;
-    // COOLING constraints
-    public int thermalPerformance;
-    // PSU constraints
-    public int psuPower;
     // MOTHERBOARD constraints
     public int numOfRamSlotsMb;
     public int CapacityMb;

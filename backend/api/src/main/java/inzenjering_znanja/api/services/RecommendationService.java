@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import inzenjering_znanja.api.DTO.RecommendDTO;
 import inzenjering_znanja.api.DTO.RecommendResponseDTO;
-import inzenjering_znanja.api.Helpers.EuclideanDistanceCalculator;
 
 @Service
 public class RecommendationService {
@@ -162,33 +161,6 @@ public class RecommendationService {
                     "FILTER(?mbSocket ='" + constraints.mbSocket + "') . \n";
         }
         return queryString += "}";
-    }
-
-    public List<Double> mostSimilarPC(List<Double> targetConfig) {
-        List<List<Double>> configs = eqService.executeGetAllConfigsQuery();
-        List<Double> distances = calculateDistances(targetConfig, configs);
-        return getTopConfiguration(distances, configs);
-    }
-
-    private static List<Double> calculateDistances(List<Double> targetConfiguration,
-            List<List<Double>> configurations) {
-        List<Double> distances = new ArrayList<>();
-
-        for (List<Double> configuration : configurations) {
-            double distance = EuclideanDistanceCalculator.calculateEuclideanDistance(targetConfiguration,
-                    configuration);
-            distances.add(distance);
-        }
-
-        return distances;
-    }
-
-    private static List<Double> getTopConfiguration(List<Double> distances, List<List<Double>> configurations) {
-        // Find the index with the smallest distance (top configuration)
-        int topIndex = distances.indexOf(Collections.min(distances));
-
-        // Return the top configuration
-        return configurations.get(topIndex);
     }
 
 }

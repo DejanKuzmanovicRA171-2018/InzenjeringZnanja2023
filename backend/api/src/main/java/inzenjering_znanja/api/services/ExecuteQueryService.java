@@ -21,6 +21,15 @@ import org.springframework.stereotype.Service;
 
 import inzenjering_znanja.api.DTO.RecommendDTO;
 import inzenjering_znanja.api.DTO.RecommendResponseDTO;
+import inzenjering_znanja.api.Models.CPU;
+import inzenjering_znanja.api.Models.Case;
+import inzenjering_znanja.api.Models.Cooling;
+import inzenjering_znanja.api.Models.GPU;
+import inzenjering_znanja.api.Models.Motherboard;
+import inzenjering_znanja.api.Models.PC;
+import inzenjering_znanja.api.Models.PSU;
+import inzenjering_znanja.api.Models.RAM;
+import inzenjering_znanja.api.Models.Storage;
 
 @Service
 public class ExecuteQueryService {
@@ -172,28 +181,48 @@ public class ExecuteQueryService {
         return response;
     }
 
-    public List<List<Double>> executeGetAllConfigsQuery() {
+    public List<PC> executeGetAllConfigsQuery() {
         String queryString = queryPrefix +
-                "SELECT ?cpu ?gpu ?ram ?motherboard ?storage\n" +
-                "WHERE {\n" +
-                "?cpu a ont:CPU. ?gpu a ont:GPU. ?ram a ont:RAM. ?motherboard a ont:Motherboard. ?storage a ont:Storage.\n"
-                +
-                "?gpu ont:hasPCI-E ?gc. ?motherboard ont:hasPCI-E ?gc. \n" +
-                "?cpu ont:hasSocket ?socket. ?motherboard ont:hasSocket ?socket.\n" +
-                "?ram ont:hasRAMSpeedType ?ramSpeed. ?motherboard ont:hasRAMSpeedType ?ramSpeed. ?cpu ont:hasRAMSpeedType ?ramSpeed. ?ram ont:hasNumberOfRAMSlots ?ramSlotsR. ?motherboard ont:hasNumberOfRAMSlots ?ramSlotsM. FILTER(?ramSlotsR <= ?ramSlotsM). \n"
-                +
-                "?motherboard ont:hasRAMCapacity ?ramCapacityM. ?ram ont:hasSizeOfRAM ?ramCapacityR. \n" +
-                "FILTER(?ramCapacityR <= ?ramCapacityM).\n";
+                "SELECT ?cpu ?cpuClockSpeed ?cpuCores ?cpuThreads ?gpu ?gpuClockSpeed ?gpuCores ?gpuVRAM ?motherboard ?ramSlotsM ?ramCapacityM ?ram ?ramClock ?ramCapacityR ?storage ?storageSize ?writeSpeed ?rpm\n"
+                + //
+                "WHERE {\n" + //
+                "?cpu a ont:CPU;\n" + //
+                "   ont:hasSocket ?socket;\n" + //
+                "   ont:hasRAMSpeedType ?ramSpeedC;\n" + //
+                "   ont:hasClockSpeed ?cpuClockSpeed;\n" + //
+                "   ont:hasNumberOfCores ?cpuCores;\n" + //
+                "   ont:hasNumberOfThreads ?cpuThreads.\n" + //
+                "?gpu a ont:GPU;\n" + //
+                "   ont:hasPCI-E ?gc;\n" + //
+                "   ont:hasVRAM ?gpuVRAM;\n" + //
+                "   ont:hasClockSpeed ?gpuClockSpeed; ont:hasNumberOfCores ?gpuCores.\n" + //
+                "?ram a ont:RAM;\n" + //
+                "   ont:hasClockSpeed ?ramClock;\n" + //
+                "   ont:hasNumberOfRAMSlots ?ramSlotsR;\n" + //
+                "   ont:hasSizeOfRAM ?ramCapacityR;\n" + //
+                "   ont:hasRAMSpeedType ?ramSpeedR.\n" + //
+                "?motherboard a ont:Motherboard;\n" + //
+                "   ont:hasPCI-E ?gc;\n" + //
+                "   ont:hasSocket ?socket;\n" + //
+                "   ont:isCompatibleWithMotherboardType ?mbT1;\n" + //
+                "   ont:hasNumberOfRAMSlots ?ramSlotsM; ont:hasRAMCapacity ?ramCapacityM; ont:hasRAMSpeedType ?ramSpeedM.\n"
+                + //
+                "?storage a ont:Storage;\n" + //
+                "   ont:hasWriteSpeed ?writeSpeed; ont:hasRPM ?rpm; ont:hasCapacity ?storageSize.\n" + //
+                "?storage ont:hasRPM ?rpm.\n" + //
+                "FILTER(?ramSlotsR <= ?ramSlotsM && ?ramCapacityR <= ?ramCapacityM && ?ramSpeedC = ?ramSpeedR && ?ramSpeedR = ?ramSpeedM)\n"
+                + //
+                "}";
         System.out.println(queryString);
         Query query = QueryFactory.create(queryString);
-        List<List<Double>> allConfigs = new ArrayList<>();
+        List<PC> allConfigs = new ArrayList<>();
         // Execute the query on the inferred model
         try (QueryExecution queryExecution = QueryExecutionFactory.create(query, infModel)) {
             ResultSet results = queryExecution.execSelect();
             while (results.hasNext()) {
                 QuerySolution solution = results.nextSolution();
-                List<Double> features = extractFeatures(solution);
-                allConfigs.add(features);
+                PC pc = extractFeatures(solution);
+                allConfigs.add(pc);
             }
         } catch (Exception e) {
             // Log or handle the exception
@@ -203,25 +232,97 @@ public class ExecuteQueryService {
         return allConfigs;
     }
 
-    private static List<Double> extractFeatures(QuerySolution solution) {
-        List<Double> features = new ArrayList<>();
+    public List<PC> completePCs(List<PC> pcs) {
+        for (PC pc : pcs) {
+            String queryCasePSUString = queryPrefix +
+                    "SELECT ?psu ?case ?cooling ?coolingPower ?psuPower ?ramCapacity ?gpuCores" +
+                    "?cpuCores ?gpuVRAM\n" +
+                    "WHERE { \n" +
+                    " ?psu a ont:PowerSupply .\n" + //
+                    " ?case a ont:Case .\n" + //
+                    " ?cooling a ont:Cooling .\n" + //
+                    " BIND(ont:" + pc.getCpu().getName() + " AS ?cpu) .\n" + //
+                    " BIND(ont:" + pc.getGpu().getName() + " AS ?gpu) .\n" + //
+                    " BIND(ont:" + pc.getMotherboard().getName() + " AS ?motherboard).\n" + //
+                    " BIND(ont:" + pc.getRam().getName() + " AS ?ram).\n" + //
+                    " BIND(ont:" + pc.getStorage().getName() + " AS ?storage) .\n" + //
+                    " ?ram ont:hasSizeOfRAM ?ramCapacity .\n" +
+                    " ?gpu ont:hasNumberOfCores ?gpuCores .\n" +
+                    " ?cpu ont:hasNumberOfCores ?cpuCores .\n" +
+                    " ?gpu ont:hasVRAM ?gpuVRAM .\n" +
+                    " ?cpu ont:hasPower ?cpuPower .\n" + //
+                    " ?gpu ont:hasPower ?gpuPower .\n" + //
+                    " ?psu ont:hasPower ?psuPower.\n" + //
+                    " FILTER ( ( ?cpuPower + ?gpuPower ) <= ?psuPower ).\n" + //
+                    " ?cooling ont:hasSocket ?socket. \n" + //
+                    " ?cpu ont:hasSocket ?socket. \n" + //
+                    " ?motherboard ont:hasSocket ?socket. \n" + //
+                    " ?cooling ont:hasPower ?coolingPower.\n" +
+                    " FILTER(?coolingPower >= ?cpuPower).\n" +
+                    " ?case ont:isCompatibleWithPSUType ?psuT1.\n" + //
+                    " ?psu ont:isCompatibleWithPSUType ?psuT2.\n" + //
+                    " FILTER(?psuT1 = ?psuT2).\n" +
+                    " ?case ont:isCompatibleWithMotherboardType ?mbT1.\n" + //
+                    " ?motherboard ont:isCompatibleWithMotherboardType ?mbT2.\n" + //
+                    " FILTER(?mbT1 = ?mbT2).\n" +
+                    "}";
+            Query queryCasePSU = QueryFactory.create(queryCasePSUString);
 
-        double cpuClockSpeed = solution.getLiteral("cpuClockSpeed").getDouble();
-        double cpuCores = solution.getLiteral("cpuCores").getDouble();
-        double gpuClockSpeed = solution.getLiteral("gpuClockSpeed").getDouble();
-        double gpuCores = solution.getLiteral("gpuCores").getDouble();
-        double ramSize = solution.getLiteral("ramSize").getDouble();
-        double storageSize = solution.getLiteral("storageSize").getDouble();
-        double writeSpeed = solution.getLiteral("writeSpeed").getDouble();
+            try (QueryExecution qe = QueryExecutionFactory.create(queryCasePSU, infModel)) {
+                ResultSet results = qe.execSelect();
 
-        features.add(cpuClockSpeed);
-        features.add(cpuCores);
-        features.add(gpuClockSpeed);
-        features.add(gpuCores);
-        features.add(ramSize);
-        features.add(storageSize);
-        features.add(writeSpeed);
+                if (results.hasNext()) {
+                    QuerySolution solution = results.nextSolution();
+                    String psu = solution.getResource("psu").getLocalName();
+                    String pcCase = solution.getResource("case").getLocalName();
+                    Case newCase = new Case(pcCase);
+                    int psuPower = solution.getLiteral("psuPower").getInt();
+                    PSU newPSU = new PSU(psu, psuPower);
+                    String cooling = solution.getResource("cooling").getLocalName();
+                    int coolingPower = solution.getLiteral("coolingPower").getInt();
+                    Cooling newCooling = new Cooling(cooling, coolingPower);
+                    pc.setPsu(newPSU);
+                    pc.setCooling(newCooling);
+                    pc.setPcCase(newCase);
+                }
+            } catch (Exception e) {
+                // Log or handle the exception
+                e.printStackTrace();
+                return null;
+            }
+        }
 
-        return features;
+        return pcs;
+    }
+
+    private static PC extractFeatures(QuerySolution solution) {
+
+        String cpu = solution.getResource("cpu").getLocalName();
+        int cpuClockSpeed = solution.getLiteral("cpuClockSpeed").getInt();
+        int cpuCores = solution.getLiteral("cpuCores").getInt();
+        int cpuThreads = solution.getLiteral("cpuThreads").getInt();
+        CPU newCPU = new CPU(cpu, cpuClockSpeed, cpuCores, cpuThreads);
+        String gpu = solution.getResource("gpu").getLocalName();
+        int gpuClockSpeed = solution.getLiteral("gpuClockSpeed").getInt();
+        int gpuCores = solution.getLiteral("gpuCores").getInt();
+        int gpuVRAM = solution.getLiteral("gpuVRAM").getInt();
+        GPU newGPU = new GPU(gpu, gpuClockSpeed, gpuCores, gpuVRAM);
+        String motherboard = solution.getResource("motherboard").getLocalName();
+        int numOfRAMSlots = solution.getLiteral("ramSlotsM").getInt();
+        int ramCapacityM = solution.getLiteral("ramCapacityM").getInt();
+        Motherboard newMotherboard = new Motherboard(motherboard, numOfRAMSlots, ramCapacityM);
+        String ram = solution.getResource("ram").getLocalName();
+        // String ramSpeedType = solution.getLiteral("ramSpeed").getString();
+        int ramClockSpeed = solution.getLiteral("ramClock").getInt();
+        int ramCapacityR = solution.getLiteral("ramCapacityR").getInt();
+        RAM newRAM = new RAM(ram, ramClockSpeed, ramCapacityR);
+        String storage = solution.getResource("storage").getLocalName();
+        int storageSize = solution.getLiteral("storageSize").getInt();
+        int writeSpeed = solution.getLiteral("writeSpeed").getInt();
+        int rpm = solution.getLiteral("rpm").getInt();
+        Storage newStorage = new Storage(storage, writeSpeed, storageSize, rpm);
+        PC newPC = new PC(newCPU, newGPU, newMotherboard, newRAM, newStorage);
+
+        return newPC;
     }
 }

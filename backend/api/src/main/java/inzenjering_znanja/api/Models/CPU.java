@@ -1,58 +1,37 @@
 package inzenjering_znanja.api.Models;
 
-public class CPU {
+import lombok.Getter;
+import lombok.Setter;
+import ucm.gaia.jcolibri.cbrcore.Attribute;
+import ucm.gaia.jcolibri.cbrcore.CaseComponent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Getter
+@Setter
+public class CPU implements CaseComponent {
     // FIELDS
     private String name;
-    private int clockSpeed;
-    private int numOfCores;
-    private int numOfThreads;
+    private int cpuClockSpeed;
+    private int cpuNumOfCores;
+    private int cpuNumOfThreads;
 
     // CONSTRUCTORS
     public CPU() {
-        this.name = "";
-        this.clockSpeed = 0;
-        this.numOfCores = 0;
-        this.numOfThreads = 0;
+        this.cpuClockSpeed = 0;
+        this.cpuNumOfCores = 0;
+        this.cpuNumOfThreads = 0;
     }
 
-    public CPU(String name, int clockSpeed, int numOfCores, int numOfThreads) {
+    public CPU(String name, int cpuClockSpeed, int cpuNumOfCores, int cpuNumOfThreads) {
         this.name = name;
-        this.clockSpeed = clockSpeed;
-        this.numOfCores = numOfCores;
-        this.numOfThreads = numOfThreads;
+        this.cpuClockSpeed = cpuClockSpeed;
+        this.cpuNumOfCores = cpuNumOfCores;
+        this.cpuNumOfThreads = cpuNumOfThreads;
     }
 
-    // GET METHODS
-    public String getName() {
-        return this.name;
-    }
-
-    public int getClockSpeed() {
-        return this.clockSpeed;
-    }
-
-    public int getNumOfCores() {
-        return this.numOfCores;
-    }
-
-    public int getNumOfThreads() {
-        return this.numOfThreads;
-    }
-
-    // SET METHODS
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setClockSpeed(int clockSpeed) {
-        this.clockSpeed = clockSpeed;
-    }
-
-    public void setNumOfCores(int numOfCores) {
-        this.numOfCores = numOfCores;
-    }
-
-    public void setNumOfThreads(int numOfThreads) {
-        this.numOfThreads = numOfThreads;
+    @JsonIgnore
+    @Override
+    public Attribute getIdAttribute() {
+        return new Attribute("id", this.getClass());
     }
 }
