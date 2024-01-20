@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const CPU = ({ onCPUChange }) => {
   const socketOptions = [
+    "AM1",
     "AM2",
     "AM2+",
     "AM3",
@@ -22,6 +23,7 @@ const CPU = ({ onCPUChange }) => {
     "LGA 775",
     "SP5",
     "sTR5",
+    "TR4",
   ];
   const ramSpeedOptions = ["DDR1", "DDR2", "DDR3", "DDR4", "DDR5"];
   const [cpuData, setCPUData] = useState({

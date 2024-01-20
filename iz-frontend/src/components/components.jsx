@@ -18,6 +18,10 @@ const Components = () => {
   const [motherboardData, setMotherboardData] = useState({});
   const [recComponents, setRecComponents] = useState(null);
   const [gamingScore, setGamingScore] = useState(null);
+  const [hostingScore, setHostingScore] = useState(null);
+  const [homeScore, setHomeScore] = useState(null);
+  const [workScore, setWorkScore] = useState(null);
+  const [miningScore, setMiningScore] = useState(null);
   const [loading, setLoading] = useState(false);
   const labels = [
     "Processor: ",
@@ -32,6 +36,10 @@ const Components = () => {
   const postData = async () => {
     setLoading(true);
     setGamingScore(null);
+    setHostingScore(null);
+    setHomeScore(null);
+    setWorkScore(null);
+    setMiningScore(null);
     const url = "http://localhost:8080/recommend";
 
     const requestBody = {
@@ -70,16 +78,19 @@ const Components = () => {
       mbSocket: motherboardData.socket,
       pciEMb: motherboardData.pciE,
     };
-    console.log("CAOS", requestBody);
     try {
       setRecComponents(null);
 
       const response = await axios.post(url, requestBody);
       console.log("POST request successful:", response.data);
-      if (response.data === "") {
+      if (response.data.recommendedComponents === null) {
         alert("No pc configuration matches provided requirements");
       }
       setGamingScore(response.data.usageScores[0]);
+      setHostingScore(response.data.usageScores[1]);
+      setHomeScore(response.data.usageScores[2]);
+      setWorkScore(response.data.usageScores[3]);
+      setMiningScore(response.data.usageScores[4]);
 
       setRecComponents(response.data.recommendedComponents);
     } catch (error) {
@@ -122,31 +133,44 @@ const Components = () => {
     padding: "10px",
     margin: "5px",
   };
+  const getColorizedScore = (score) => {
+    let color = "";
+
+    if (score <= 33) {
+      color = "red";
+    } else if (score <= 66) {
+      color = "orange";
+    } else {
+      color = "green";
+    }
+
+    return <span style={{ color }}>{score.toFixed(2)}%</span>;
+  };
 
   return (
     <>
       <h1>Components</h1>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <CPU onCPUChange={handleCPUChange} />
         </div>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <GPU onGPUChange={handleGPUChange} />
         </div>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <Motherboard onMotherboardChange={handleMotherboardChange} />
         </div>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <RAM onRamChange={handleRamChange} />
         </div>
 
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <Storage onStorageChange={handleStorageChange} />
         </div>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <Cooling onCoolingChange={handleCoolingChange} />
         </div>
-        <div style={componentStyle}>
+        <div style={{ ...componentStyle, border: "1px solid black" }}>
           <PowerSupply onPowerSupplyChange={handlePowerSupplyChange} />
         </div>
       </div>
@@ -154,7 +178,9 @@ const Components = () => {
       <button onClick={postData}>Send POST Request</button>
       {loading ? <p>Loading...</p> : null}
       {recComponents && (
-        <div>
+        <div
+          style={{ border: "1px solid black", padding: "10px", margin: "5px" }}
+        >
           <h2>Recommended Components:</h2>
           {recComponents.split(" || ").map((result, index) => (
             <p key={index}>
@@ -164,7 +190,66 @@ const Components = () => {
           ))}
         </div>
       )}
-      {gamingScore && <p>Gaming score: {gamingScore.toFixed(2)}%</p>}
+      {gamingScore !== null && gamingScore !== 0 && (
+        <div
+          style={{
+            border: "1px solid black",
+            width: "10%",
+            padding: "10px",
+            margin: "5px",
+          }}
+        >
+          <p>Gaming score: {getColorizedScore(gamingScore)}</p>
+        </div>
+      )}
+      {hostingScore !== null && hostingScore !== 0 && (
+        <div
+          style={{
+            border: "1px solid black",
+            width: "10%",
+            padding: "10px",
+            margin: "5px",
+          }}
+        >
+          <p>Hosting score: {getColorizedScore(hostingScore)}</p>
+        </div>
+      )}
+      {homeScore !== null && homeScore !== 0 && (
+        <div
+          style={{
+            border: "1px solid black",
+            width: "10%",
+            padding: "10px",
+            margin: "5px",
+          }}
+        >
+          <p>Home score: {getColorizedScore(homeScore)}</p>
+        </div>
+      )}
+      {workScore !== null && workScore !== 0 && (
+        <div
+          style={{
+            border: "1px solid black",
+            width: "10%",
+            padding: "10px",
+            margin: "5px",
+          }}
+        >
+          <p>Work score: {getColorizedScore(workScore)}</p>
+        </div>
+      )}
+      {miningScore !== null && miningScore !== 0 && (
+        <div
+          style={{
+            border: "1px solid black",
+            width: "10%",
+            padding: "10px",
+            margin: "5px",
+          }}
+        >
+          <p>Mining score: {getColorizedScore(miningScore)}</p>
+        </div>
+      )}
     </>
   );
 };

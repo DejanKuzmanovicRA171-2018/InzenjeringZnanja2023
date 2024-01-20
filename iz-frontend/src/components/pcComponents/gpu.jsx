@@ -19,6 +19,7 @@ const GPU = ({ onGPUChange }) => {
     "3.0x8",
     "3.0x16",
     "4.0x16",
+    "5.0x16",
     "PCI-5V",
   ];
 
@@ -80,7 +81,7 @@ const GPU = ({ onGPUChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="pciE">PCI-E:</label>
+          <label htmlFor="pciE">PCI-E: </label>
           <select
             id="pciE"
             name="pciE"
