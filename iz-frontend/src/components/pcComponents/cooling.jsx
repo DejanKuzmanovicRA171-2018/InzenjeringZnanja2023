@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const Cooling = ({ onCoolingChange }) => {
   const socketOptions = [
+    "AM1",
     "AM2",
     "AM2+",
     "AM3",
@@ -22,6 +23,7 @@ const Cooling = ({ onCoolingChange }) => {
     "LGA 775",
     "SP5",
     "sTR5",
+    "TR4",
   ];
 
   const [coolingData, setCoolingData] = useState({

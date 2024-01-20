@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const Motherboard = ({ onMotherboardChange }) => {
   const socketOptions = [
+    "AM1",
     "AM2",
     "AM2+",
     "AM3",
@@ -22,6 +23,7 @@ const Motherboard = ({ onMotherboardChange }) => {
     "LGA 775",
     "SP5",
     "sTR5",
+    "TR4",
   ];
 
   const ramSpeedOptions = ["DDR1", "DDR2", "DDR3", "DDR4", "DDR5"];
@@ -36,6 +38,7 @@ const Motherboard = ({ onMotherboardChange }) => {
     "3.0x8",
     "3.0x16",
     "4.0x16",
+    "5.0x16",
     "PCI-5V",
   ];
 
