@@ -10,81 +10,249 @@ net
 node CPU_Malfunction
 {
      label = "C1";
-     position = (419 206);
-     states = ("CPU_Malf" "CPU_Func");
+     position = (380 195);
+     states = ("CPU_malf" "CPU_func");
 }
 
 node GPU_Malfunction
 {
      label = "C2";
-     position = (883 199);
-     states = ("GPU_Malf" "GPU_Func");
+     position = (906 200);
+     states = ("GPU_malf" "GPU_func");
 }
 
 node Overclocked
 {
      label = "C3";
-     position = (289 21);
+     position = (595 15);
      states = ("Yes" "No");
 }
 
 node Dust
 {
      label = "C4";
-     position = (728 9);
+     position = (750 13);
      states = ("Yes" "No");
 }
 
-node Bad_cooling
+node Overheating
 {
      label = "C5";
-     position = (911 20);
+     position = (928 17);
      states = ("Yes" "No");
 }
 
 node Frame_drops
 {
      label = "C6";
-     position = (817 351);
+     position = (676 360);
      states = ("Yes" "No");
 }
 
 node No_display
 {
      label = "C7";
-     position = (479 361);
+     position = (424 448);
      states = ("Yes" "No");
 }
 
 node Unsufficient_psu
 {
      label = "C8";
-     position = (599 12);
+     position = (380 21);
      states = ("Yes" "No");
 }
 
 node Faulty_motherboard
 {
      label = "C9";
-     position = (136 84);
-     states = ("Yes" "No");
-}
-
-node Screen_tearing
-{
-     label = "C1";
-     position = (650 349);
+     position = (346 72);
      states = ("Yes" "No");
 }
 
 node Motherboard_Malfunction
 {
      label = "C2";
-     position = (651 214);
+     position = (598 201);
+     states = ("Motherboard_malf" "Motherboard_func");
+}
+
+node RAM_Malfunction
+{
+     label = "C1";
+     position = (1181 204);
+     states = ("RAM_malf" "RAM_func");
+}
+
+node Mismatched_ram
+{
+     label = "C2";
+     position = (1075 32);
      states = ("Yes" "No");
 }
 
-potential (CPU_Malfunction | Faulty_motherboard Unsufficient_psu Bad_cooling Overclocked)
+node Incompatible_ram
+{
+     label = "C3";
+     position = (1188 59);
+     states = ("Yes" "No");
+}
+
+node Storage_Malfunction
+{
+     label = "C4";
+     position = (1460 176);
+     states = ("Storage_malf" "Storage_func");
+}
+
+node Fragmentation
+{
+     label = "C5";
+     position = (1364 58);
+     states = ("Yes" "No");
+}
+
+node No_space
+{
+     label = "C6";
+     position = (1621 69);
+     states = ("Yes" "No");
+}
+
+node Corrupted_files
+{
+     label = "C7";
+     position = (1498 33);
+     states = ("Yes" "No");
+}
+
+node Slow_performance
+{
+     label = "C8";
+     position = (992 362);
+     states = ("Yes" "No");
+}
+
+node OS_Malfunction
+{
+     label = "C9";
+     position = (125 165);
+     states = ("OS_malf" "OS_func");
+}
+
+node Not_updated
+{
+     label = "C10";
+     position = (22 71);
+     states = ("Yes" "No");
+}
+
+node Malware
+{
+     label = "C11";
+     position = (125 34);
+     states = ("Yes" "No");
+}
+
+node Insufficient_resources
+{
+     label = "C12";
+     position = (185 83);
+     states = ("Yes" "State 1");
+}
+
+node Blue_screen
+{
+     label = "C13";
+     position = (175 311);
+     states = ("Yes" "No");
+}
+
+node Monitor_Malfunction
+{
+     label = "C14";
+     position = (198 497);
+     states = ("Monitor_malf" "Monitor_func");
+}
+
+node Port_Malfunction
+{
+     label = "C15";
+     position = (365 563);
+     states = ("Port_malf" "Port_func");
+}
+
+node Loose_connection
+{
+     label = "C16";
+     position = (249 632);
+     states = ("Yes" "No");
+}
+
+node Physical_damage
+{
+     label = "C17";
+     position = (361 689);
+     states = ("Yes" "No");
+}
+
+node Overloading
+{
+     label = "C18";
+     position = (524 677);
+     states = ("Yes" "No");
+}
+
+node Incompatible_GPU
+{
+     label = "C20";
+     position = (109 591);
+     states = ("Yes" "No");
+}
+
+node Driver_Malfunction
+{
+     label = "C22";
+     position = (137 405);
+     states = ("Driver_malf" "Driver_func");
+}
+
+node Resolution_mismatch
+{
+     label = "C23";
+     position = (100 521);
+     states = ("Yes" "No");
+}
+
+node Screen_tearing
+{
+     label = "C24";
+     position = (420 334);
+     states = ("Yes" "No");
+}
+
+node Incompatible_drivers
+{
+     label = "C25";
+     position = (17 250);
+     states = ("Yes" "No");
+}
+
+node Outdated_drivers
+{
+     label = "C26";
+     position = (0 315);
+     states = ("Yes" "No");
+}
+
+node Conflicting_drivers
+{
+     label = "C27";
+     position = (0 382);
+     states = ("Yes" "No");
+}
+
+potential (CPU_Malfunction | Faulty_motherboard Unsufficient_psu Overheating Overclocked)
 {
  data = ((((( 1.0 0.0 )
 ( 1.0 0.0 ))
@@ -104,7 +272,7 @@ potential (CPU_Malfunction | Faulty_motherboard Unsufficient_psu Bad_cooling Ove
 ( 1.0 0.0 )))));
 }
 
-potential (GPU_Malfunction | Unsufficient_psu Bad_cooling Dust Overclocked)
+potential (GPU_Malfunction | Unsufficient_psu Overheating Dust Overclocked)
 {
  data = ((((( 1.0 0.0 )
 ( 1.0 0.0 ))
@@ -134,25 +302,41 @@ potential (Dust)
  data = ( 0.5 0.5 );
 }
 
-potential (Bad_cooling)
+potential (Overheating)
 {
  data = ( 0.5 0.5 );
 }
 
-potential (Frame_drops | CPU_Malfunction GPU_Malfunction)
+potential (Frame_drops | RAM_Malfunction CPU_Malfunction GPU_Malfunction)
 {
- data = ((( 1.0 0.0 )
+ data = (((( 1.0 0.0 )
+( 0.75 0.25 ))
+(( 0.95 0.05 )
+( 0.5 0.5 )))
+((( 1.0 0.0 )
 ( 0.6 0.4 ))
 (( 0.8 0.2 )
-( 0.0 1.0 )));
+( 0.0 1.0 ))));
 }
 
-potential (No_display | CPU_Malfunction GPU_Malfunction)
+potential (No_display | Driver_Malfunction Port_Malfunction Monitor_Malfunction GPU_Malfunction)
 {
- data = ((( 1.0 0.0 )
+ data = ((((( 1.0 0.0 )
+( 0.95 0.05 ))
+(( 0.9 0.1 )
+( 0.8 0.2 )))
+((( 0.8 0.2 )
 ( 0.7 0.3 ))
-(( 1.0 0.0 )
-( 0.0 1.0 )));
+(( 0.6 0.4 )
+( 0.15 0.85 ))))
+(((( 1.0 0.0 )
+( 0.8 0.2 ))
+(( 0.75 0.25 )
+( 0.65 0.35 )))
+((( 0.65 0.35 )
+( 0.55 0.45 ))
+(( 0.45 0.55 )
+( 0.0 1.0 )))));
 }
 
 potential (Unsufficient_psu)
@@ -165,23 +349,199 @@ potential (Faulty_motherboard)
  data = ( 0.5 0.5 );
 }
 
-potential (Screen_tearing | Motherboard_Malfunction CPU_Malfunction GPU_Malfunction)
-{
- data = (((( 1.0 0.0 )
-( 0.4 0.6 ))
-(( 0.8 0.2 )
-( 0.0 1.0 )))
-((( 1.0 0.0 )
-( 0.4 0.6 ))
-(( 0.8 0.2 )
-( 0.0 1.0 ))));
-}
-
 potential (Motherboard_Malfunction | Unsufficient_psu Dust)
 {
  data = ((( 0.8 0.2 )
 ( 0.5 0.5 ))
 (( 0.65 0.35 )
 ( 0.0 1.0 )));
+}
+
+potential (RAM_Malfunction | Incompatible_ram Overheating Mismatched_ram Overclocked)
+{
+ data = ((((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 ))))
+(((( 0.9 0.1 )
+( 0.8 0.2 ))
+(( 0.4 0.6 )
+( 0.25 0.75 )))
+((( 0.6 0.4 )
+( 0.2 0.8 ))
+(( 0.1 0.9 )
+( 0.0 1.0 )))));
+}
+
+potential (Mismatched_ram)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Incompatible_ram)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Storage_Malfunction | No_space Corrupted_files Fragmentation)
+{
+ data = (((( 1.0 0.0 )
+( 0.9 0.1 ))
+(( 0.85 0.15 )
+( 0.75 0.25 )))
+((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.15 0.85 )
+( 0.0 1.0 ))));
+}
+
+potential (Fragmentation)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (No_space)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Corrupted_files)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Slow_performance | Storage_Malfunction RAM_Malfunction CPU_Malfunction)
+{
+ data = (((( 1.0 0.0 )
+( 0.8 0.2 ))
+(( 0.9 0.1 )
+( 0.7 0.3 )))
+((( 0.95 0.05 )
+( 0.65 0.35 ))
+(( 0.75 0.25 )
+( 0.0 1.0 ))));
+}
+
+potential (OS_Malfunction | Insufficient_resources Malware Not_updated)
+{
+ data = (((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 ))));
+}
+
+potential (Not_updated)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Malware)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Insufficient_resources)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Blue_screen | Motherboard_Malfunction CPU_Malfunction OS_Malfunction)
+{
+ data = (((( 0.9 0.1 )
+( 0.6 0.4 ))
+(( 0.8 0.2 )
+( 0.2 0.8 )))
+((( 0.85 0.15 )
+( 0.5 0.5 ))
+(( 0.7 0.3 )
+( 0.0 1.0 ))));
+}
+
+potential (Monitor_Malfunction | Resolution_mismatch Incompatible_GPU)
+{
+ data = ((( 1.0 0.0 )
+( 0.75 0.25 ))
+(( 1.0 0.0 )
+( 0.0 1.0 )));
+}
+
+potential (Port_Malfunction | Overloading Physical_damage Loose_connection)
+{
+ data = (((( 0.5 0.5 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.5 0.5 )))
+((( 0.5 0.5 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.5 0.5 ))));
+}
+
+potential (Loose_connection)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Physical_damage)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Overloading)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Incompatible_GPU)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Driver_Malfunction | Conflicting_drivers Outdated_drivers Incompatible_drivers)
+{
+ data = (((( 1.0 0.0 )
+( 0.8 0.2 ))
+(( 1.0 0.0 )
+( 0.65 0.35 )))
+((( 1.0 0.0 )
+( 0.4 0.6 ))
+(( 1.0 0.0 )
+( 0.0 1.0 ))));
+}
+
+potential (Resolution_mismatch)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Screen_tearing | Monitor_Malfunction GPU_Malfunction)
+{
+ data = ((( 1.0 0.0 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.0 1.0 )));
+}
+
+potential (Incompatible_drivers)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Outdated_drivers)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Conflicting_drivers)
+{
+ data = ( 0.5 0.5 );
 }
 
