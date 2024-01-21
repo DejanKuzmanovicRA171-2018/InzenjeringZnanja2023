@@ -43,6 +43,7 @@ public class CBRController {
                 .filter(pc -> pc.getPsu() != null && pc.getPcCase() != null && pc.getCooling() != null)
                 .collect(Collectors.toList());
         similarPCs.remove(0);
+        similarPCs = similarPCs.subList(0, 5);
         return similarPCs;
     }
 

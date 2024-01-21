@@ -75,7 +75,7 @@ public class ConfigCBR implements StandardCBRApplication {
         result = new ArrayList<>();
         Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), cbrQuery,
                 _nnConfig);
-        eval = SelectCases.selectTopKRR(eval, 6);
+        eval = SelectCases.selectTopKRR(eval, 20);
         System.out.println("Retrieved cases:");
         for (RetrievalResult nse : eval) {
             System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());

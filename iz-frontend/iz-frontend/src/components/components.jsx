@@ -75,6 +75,8 @@ const Components = () => {
     setHomeScore(null);
     setWorkScore(null);
     setMiningScore(null);
+    setShowSimilarPopup(false);
+    setSimilarPCs({});
     const url = "http://localhost:8080/recommend";
 
     const requestBody = {

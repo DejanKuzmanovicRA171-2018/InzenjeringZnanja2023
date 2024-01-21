@@ -9,6 +9,7 @@ public class RecommendDTO {
     public int cpuThreadsMin;
     public int cpuThreadsMax;
     public String cpuSocket;
+    public String cpuRamSpeedType;
     // GPU constraints
     public int gpuClockMin;
     public int gpuClockMax;

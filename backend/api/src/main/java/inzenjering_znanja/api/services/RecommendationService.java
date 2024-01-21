@@ -72,6 +72,10 @@ public class RecommendationService {
             queryString += "?cpu ont:hasSocket ?cpuSocket . \n" +
                     "FILTER(?cpuSocket = '" + constraints.cpuSocket + "') .\n";
         }
+        if (constraints.cpuRamSpeedType != "") {
+            queryString += 
+                    "FILTER(?ramSpeedC = '" + constraints.cpuRamSpeedType + "') .\n";
+        }
         // GPU CONSTRAINTS
         if (constraints.gpuClockMin != 0) {
             queryString += 
