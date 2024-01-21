@@ -1,0 +1,187 @@
+net
+{
+     node_size = (0 0);
+     name = "New BN";
+     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9)";
+     UnBBayes_Color_Probabilistic_Description = "-256";
+     UnBBayes_Color_Probabilistic_Explanation = "-16711936";
+}
+
+node CPU_Malfunction
+{
+     label = "C1";
+     position = (419 206);
+     states = ("CPU_Malf" "CPU_Func");
+}
+
+node GPU_Malfunction
+{
+     label = "C2";
+     position = (883 199);
+     states = ("GPU_Malf" "GPU_Func");
+}
+
+node Overclocked
+{
+     label = "C3";
+     position = (289 21);
+     states = ("Yes" "No");
+}
+
+node Dust
+{
+     label = "C4";
+     position = (728 9);
+     states = ("Yes" "No");
+}
+
+node Bad_cooling
+{
+     label = "C5";
+     position = (911 20);
+     states = ("Yes" "No");
+}
+
+node Frame_drops
+{
+     label = "C6";
+     position = (817 351);
+     states = ("Yes" "No");
+}
+
+node No_display
+{
+     label = "C7";
+     position = (479 361);
+     states = ("Yes" "No");
+}
+
+node Unsufficient_psu
+{
+     label = "C8";
+     position = (599 12);
+     states = ("Yes" "No");
+}
+
+node Faulty_motherboard
+{
+     label = "C9";
+     position = (136 84);
+     states = ("Yes" "No");
+}
+
+node Screen_tearing
+{
+     label = "C1";
+     position = (650 349);
+     states = ("Yes" "No");
+}
+
+node Motherboard_Malfunction
+{
+     label = "C2";
+     position = (651 214);
+     states = ("Yes" "No");
+}
+
+potential (CPU_Malfunction | Faulty_motherboard Unsufficient_psu Bad_cooling Overclocked)
+{
+ data = ((((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 ))))
+(((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 0.8 0.2 )
+( 0.6 0.4 ))
+(( 0.2 0.8 )
+( 1.0 0.0 )))));
+}
+
+potential (GPU_Malfunction | Unsufficient_psu Bad_cooling Dust Overclocked)
+{
+ data = ((((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 ))))
+(((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.7 0.3 )
+( 0.3 0.7 )))
+((( 0.7 0.3 )
+( 0.1 0.9 ))
+(( 0.15 0.85 )
+( 0.0 1.0 )))));
+}
+
+potential (Overclocked)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Dust)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Bad_cooling)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Frame_drops | CPU_Malfunction GPU_Malfunction)
+{
+ data = ((( 1.0 0.0 )
+( 0.6 0.4 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )));
+}
+
+potential (No_display | CPU_Malfunction GPU_Malfunction)
+{
+ data = ((( 1.0 0.0 )
+( 0.7 0.3 ))
+(( 1.0 0.0 )
+( 0.0 1.0 )));
+}
+
+potential (Unsufficient_psu)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Faulty_motherboard)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Screen_tearing | Motherboard_Malfunction CPU_Malfunction GPU_Malfunction)
+{
+ data = (((( 1.0 0.0 )
+( 0.4 0.6 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )))
+((( 1.0 0.0 )
+( 0.4 0.6 ))
+(( 0.8 0.2 )
+( 0.0 1.0 ))));
+}
+
+potential (Motherboard_Malfunction | Unsufficient_psu Dust)
+{
+ data = ((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.65 0.35 )
+( 0.0 1.0 )));
+}
+
