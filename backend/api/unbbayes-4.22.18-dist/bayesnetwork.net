@@ -2,7 +2,7 @@ net
 {
      node_size = (0 0);
      name = "New BN";
-     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C20,C22,C23,C24,C25,C26,C27)";
+     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C20,C22,C23,C24,C25,C26,C27,C19,C21,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42)";
      UnBBayes_Color_Probabilistic_Description = "-256";
      UnBBayes_Color_Probabilistic_Explanation = "-16711936";
 }
@@ -31,7 +31,7 @@ node Overclocked
 node Dust
 {
      label = "C4";
-     position = (750 13);
+     position = (780 20);
      states = ("Yes" "No");
 }
 
@@ -185,7 +185,7 @@ node Port_Malfunction
 node Loose_connection
 {
      label = "C16";
-     position = (86 704);
+     position = (144 657);
      states = ("Yes" "No");
 }
 
@@ -536,6 +536,111 @@ node Printer_sensor_error
 {
      label = "C42";
      position = (1817 613);
+     states = ("Yes" "No");
+}
+
+node PC_overheating
+{
+     label = "C1";
+     position = (909 363);
+     states = ("Yes" "No");
+}
+
+node Cant_conenct_with_bluetooth_headphones
+{
+     label = "C2";
+     position = (17 440);
+     states = ("Yes" "No");
+}
+
+node Headphones_Malfunction
+{
+     label = "C3";
+     position = (87 762);
+     states = ("Headphone_malf" "Headphones_func");
+}
+
+node Low_battery
+{
+     label = "C4";
+     position = (208 805);
+     states = ("Yes" "No");
+}
+
+node Bluetooth_card_Malfunction
+{
+     label = "C5";
+     position = (0 744);
+     states = ("Bluetooth_Card_malf" "Bluetooth_Card_func");
+}
+
+node Out_of_range
+{
+     label = "C6";
+     position = (160 836);
+     states = ("Yes" "No");
+}
+
+node Bluetooth_hardware_not_enabled
+{
+     label = "C7";
+     position = (0 842);
+     states = ("Yes" "No");
+}
+
+node Bluetooth_stack_issues
+{
+     label = "C8";
+     position = (72 861);
+     states = ("Yes" "No");
+}
+
+node Games_keep_crashing
+{
+     label = "C9";
+     position = (503 780);
+     states = ("Yes" "No");
+}
+
+node Runtime_Libraries_Malfunction
+{
+     label = "C10";
+     position = (623 869);
+     states = ("Runtime_Libraries_malf" "Runtime_Libraries_func");
+}
+
+node Corrupt_files
+{
+     label = "C11";
+     position = (781 850);
+     states = ("Yes" "No");
+}
+
+node Outdated_runtime_libraries
+{
+     label = "C12";
+     position = (737 916);
+     states = ("Yes" "No");
+}
+
+node Video_Game_Malfunction
+{
+     label = "C13";
+     position = (451 861);
+     states = ("Video_Game_malf" "Video_Game_func");
+}
+
+node Updates_not_installed_properly
+{
+     label = "C14";
+     position = (328 861);
+     states = ("Yes" "No");
+}
+
+node Video_game_specific_bug
+{
+     label = "C16";
+     position = (351 925);
      states = ("Yes" "No");
 }
 
@@ -1004,16 +1109,24 @@ potential (Audio_card_problem)
  data = ( 0.5 0.5 );
 }
 
-potential (PC_freezing | Storage_Malfunction CPU_Malfunction RAM_Malfunction)
+potential (PC_freezing | GPU_Malfunction Storage_Malfunction CPU_Malfunction RAM_Malfunction)
 {
- data = (((( 1.0 0.0 )
+ data = ((((( 1.0 0.0 )
 ( 0.9 0.1 ))
 (( 0.8 0.2 )
 ( 0.7 0.3 )))
 ((( 0.95 0.05 )
 ( 0.75 0.25 ))
 (( 0.65 0.35 )
-( 0.0 1.0 ))));
+( 0.0 1.0 ))))
+(((( 1.0 0.0 )
+( 0.9 0.1 ))
+(( 0.8 0.2 )
+( 0.7 0.3 )))
+((( 0.95 0.05 )
+( 0.75 0.25 ))
+(( 0.65 0.35 )
+( 0.0 1.0 )))));
 }
 
 potential (USB_port_not_working | Port_Malfunction USB_Malfunction)
@@ -1123,5 +1236,109 @@ potential (Outdated_firmware)
 potential (Printer_sensor_error)
 {
  data = ( 0.5 0.5 );
+}
+
+potential (PC_overheating | PSU_Malfunction GPU_Malfunction CPU_Cooler_Malfunction)
+{
+ data = (((( 1.0 0.0 )
+( 0.5 0.5 ))
+(( 0.85 0.15 )
+( 0.4 0.6 )))
+((( 0.8 0.2 )
+( 0.65 0.35 ))
+(( 0.6 0.4 )
+( 0.0 1.0 ))));
+}
+
+potential (Cant_conenct_with_bluetooth_headphones | Bluetooth_card_Malfunction Headphones_Malfunction)
+{
+ data = ((( 1.0 0.0 )
+( 0.85 0.15 ))
+(( 0.7 0.3 )
+( 0.0 1.0 )));
+}
+
+potential (Headphones_Malfunction | Out_of_range Low_battery)
+{
+ data = ((( 1.0 0.0 )
+( 0.8 0.2 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )));
+}
+
+potential (Low_battery)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Bluetooth_card_Malfunction | Bluetooth_stack_issues Bluetooth_hardware_not_enabled)
+{
+ data = ((( 1.0 0.0 )
+( 0.8 0.2 ))
+(( 1.0 0.0 )
+( 0.0 1.0 )));
+}
+
+potential (Out_of_range)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Bluetooth_hardware_not_enabled)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Bluetooth_stack_issues)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Games_keep_crashing | Video_Game_Malfunction Driver_Malfunction Runtime_Libraries_Malfunction)
+{
+ data = (((( 1.0 0.0 )
+( 0.7 0.3 ))
+(( 0.85 0.15 )
+( 0.5 0.5 )))
+((( 0.9 0.1 )
+( 0.65 0.35 ))
+(( 0.75 0.25 )
+( 0.0 1.0 ))));
+}
+
+potential (Runtime_Libraries_Malfunction | Corrupt_files Outdated_runtime_libraries)
+{
+ data = ((( 1.0 0.0 )
+( 0.7 0.3 ))
+(( 0.75 0.25 )
+( 0.0 1.0 )));
+}
+
+potential (Corrupt_files)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Outdated_runtime_libraries)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Video_Game_Malfunction | Video_game_specific_bug Updates_not_installed_properly)
+{
+ data = ((( 1.0 0.0 )
+( 0.4 0.6 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )));
+}
+
+potential (Updates_not_installed_properly)
+{
+ data = ( 0.5 0.5 );
+}
+
+potential (Video_game_specific_bug)
+{
+ data = ( 1.0 0.0 );
 }
 
