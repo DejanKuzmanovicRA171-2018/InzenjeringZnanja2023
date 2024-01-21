@@ -27,11 +27,12 @@ public class BayesController {
     @GetMapping("/malfunction")
     public Map<String, Float> malfunctionSource(@RequestParam String[] evidence) {
 
+        System.out.println(evidence[0]);
         ProbabilisticNetwork net;
         BaseIO io = new NetIO();
         try {
             net = (ProbabilisticNetwork) io.load(
-                    new File("X:/GitRepos/InzenjeringZnanja2023/backend/api/unbbayes-4.22.18-dist/bayesnetwork.net"));
+                    new File("C:/Users/Dejan/Desktop/InzenjeringZnanja2023/backend/api/unbbayes-4.22.18-dist/bayesnetwork.net"));
         } catch (IOException e) {
             throw new RuntimeException("No such file");
         }

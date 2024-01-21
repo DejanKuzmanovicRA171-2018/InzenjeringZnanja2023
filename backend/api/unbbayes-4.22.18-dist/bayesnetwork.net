@@ -262,7 +262,7 @@ node Keyboard_not_working
 node Keyboard_Malfunction
 {
      label = "C2";
-     position = (577 561);
+     position = (529 551);
      states = ("Keyboard_malf" "Keyboard_func");
 }
 
@@ -290,7 +290,7 @@ node Mouse_not_working
 node Mouse_Malfunction
 {
      label = "C6";
-     position = (743 547);
+     position = (650 613);
      states = ("Mouse_malf" "Mouse_func");
 }
 
@@ -360,7 +360,7 @@ node Fan_failure
 node PC_not_powering_up
 {
      label = "C17";
-     position = (1199 427);
+     position = (1199 446);
      states = ("Yes" "No");
 }
 
@@ -409,7 +409,7 @@ node No_audio
 node Speakers_malfunction
 {
      label = "C24";
-     position = (1367 563);
+     position = (1130 798);
      states = ("Speakers_malfunction" "Speakers_func");
 }
 
@@ -423,14 +423,14 @@ node Audio_card_problem
 node PC_freezing
 {
      label = "C26";
-     position = (787 332);
+     position = (773 334);
      states = ("Yes" "No");
 }
 
 node USB_port_not_working
 {
      label = "C27";
-     position = (1408 490);
+     position = (1377 484);
      states = ("Yes" "No");
 }
 
@@ -458,7 +458,7 @@ node Write_speed_mismatch
 node Cooler_noise
 {
      label = "C31";
-     position = (1579 532);
+     position = (1540 523);
      states = ("Yes" "No");
 }
 
@@ -542,11 +542,11 @@ node Printer_sensor_error
 node PC_overheating
 {
      label = "C1";
-     position = (909 363);
+     position = (909 382);
      states = ("Yes" "No");
 }
 
-node Cant_conenct_with_bluetooth_headphones
+node Cant_connenct_with_bluetooth_headphones
 {
      label = "C2";
      position = (17 440);
@@ -556,7 +556,7 @@ node Cant_conenct_with_bluetooth_headphones
 node Headphones_Malfunction
 {
      label = "C3";
-     position = (87 762);
+     position = (0 799);
      states = ("Headphone_malf" "Headphones_func");
 }
 
@@ -570,7 +570,7 @@ node Low_battery
 node Bluetooth_card_Malfunction
 {
      label = "C5";
-     position = (0 744);
+     position = (11 739);
      states = ("Bluetooth_Card_malf" "Bluetooth_Card_func");
 }
 
@@ -584,14 +584,14 @@ node Out_of_range
 node Bluetooth_hardware_not_enabled
 {
      label = "C7";
-     position = (0 842);
+     position = (153 907);
      states = ("Yes" "No");
 }
 
 node Bluetooth_stack_issues
 {
      label = "C8";
-     position = (72 861);
+     position = (35 940);
      states = ("Yes" "No");
 }
 
@@ -1250,7 +1250,7 @@ potential (PC_overheating | PSU_Malfunction GPU_Malfunction CPU_Cooler_Malfuncti
 ( 0.0 1.0 ))));
 }
 
-potential (Cant_conenct_with_bluetooth_headphones | Bluetooth_card_Malfunction Headphones_Malfunction)
+potential (Cant_connenct_with_bluetooth_headphones | Bluetooth_card_Malfunction Headphones_Malfunction)
 {
  data = ((( 1.0 0.0 )
 ( 0.85 0.15 ))

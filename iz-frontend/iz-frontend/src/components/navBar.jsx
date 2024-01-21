@@ -14,8 +14,8 @@ const NavBar = () => {
           </NavLink>
         </div>
         <div className="navbar-nav">
-          <NavLink className="nav-link" to="/computers">
-            Desktop Computers
+          <NavLink className="nav-link" to="/pcProblems">
+            Problem with pc?
           </NavLink>
         </div>
       </div>
